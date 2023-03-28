@@ -11,6 +11,6 @@
     border-radius: 0.5rem;
 }
 
-.sidebar-scroll-bar::-webkit-scrollbar-track {
-  background: #343541;
+.divider {
+  border-top: 1px solid #444654;
 }

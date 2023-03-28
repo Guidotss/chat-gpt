@@ -14,7 +14,7 @@ export const ChatLayOut:FC<ChatLayOutProps> = ({ title, description, image, chil
   return (
     <>
         <Head>
-            <title>{ title || "Chat App" } </title>
+            <title>{ title || "Chat App" }</title>
             <meta name="author" content="Guido Olguin" />
             <meta name="keywords" content="Chat, App, Next.js" />
             <meta name="robots" content="index, follow" />
