@@ -18,7 +18,7 @@ export const SideBar = () => {
         </div>
         <div className='flex flex-col mt-5 gap-6 ml-4 text-md font-extralight overflow-auto sidebar-scroll-bar h-4/5'>
           {sidebarData.map((item) => (
-            <div className='flex flex-col'>
+            <div className='flex flex-col' key={item.id}>
               <div className='flex items-center'>
                 <div className='flex items-center'>
                   <Image
