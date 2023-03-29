@@ -1,12 +1,11 @@
 import { ChatLayOut } from "@/components"
+import { Chat } from "@/components/chat"
 
 const Home = () => {
   return (
     <ChatLayOut>
-      <div className="flex flex-col items-center">
-        <div>
-            <h1 className="text-4xl font-bold text-red-300">Welcome to Next.js!</h1>
-        </div>
+      <div className="flex justify-center items-center">
+          <Chat/>
       </div>
     </ChatLayOut>
   )
