@@ -3,6 +3,7 @@ import { Messages } from "@/interfaces";
 
 interface ChatContextProps {
     messages: Messages[]; 
+    loading: boolean;
 
     sendMessage: (message: Messages) => void;
 }

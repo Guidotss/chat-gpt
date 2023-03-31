@@ -6,7 +6,7 @@ interface AvatarProps {
 
 export const Avatar: FC<AvatarProps> = ({ children }) => {
   return (
-    <div className='w-[30px] h-[30px] flex  items-center justify-center rounded-sm'>
+    <div className='w-[40px] h-[40px] flex items-center justify-center rounded-sm'>
       {children}
     </div>
   );

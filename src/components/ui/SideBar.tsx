@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import Image from 'next/image';
 import { ChatContext } from '@/context/chat';
+import { TypingEffect } from './TypingEffect';
 
 export const SideBar = () => {
 
@@ -21,7 +22,9 @@ export const SideBar = () => {
           </div>
         </div>
         <div className='flex flex-col mt-5 gap-6 ml-4 text-md font-extralight overflow-auto sidebar-scroll-bar h-4/5'>
-          {messages.map((item) => (
+          {messages.map((item) => {
+            if(item.ia) return null; 
+            return (
             <div className='flex flex-col' key={item.id}>
               <div className='flex items-center'>
                 <div className='flex items-center'>
@@ -32,12 +35,12 @@ export const SideBar = () => {
                     height={10}
                   />
                   <div className='ml-5 self-center'>
-                    <span>{item.message}</span>
+                    <TypingEffect text={item.message} />
                   </div>
                 </div>
               </div>
             </div>
-          ))}
+          )})}
         </div>
         <div className='divider mt-10' />
       </div>

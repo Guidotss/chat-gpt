@@ -5,6 +5,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+
       colors:{
         gptlogo: '#10a37f',
         gptdarkgray: '#202123',
