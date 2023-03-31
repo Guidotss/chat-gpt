@@ -6,8 +6,9 @@ import { IAChoices, Messages } from "@/interfaces";
 type ChatActionType = 
     |{ type: "[CHAT] - Send Message", payload: Messages } 
     |{ type: "[CHAT] - Receive Message", payload: Messages}
-    |{ type: "[CHAT] - Start - Loading", payload: boolean}
-    |{ type: "[CHAT] - Stop - Loading", payload: boolean}; 
+    |{ type: "[CHAT] - Start Loading", payload: boolean}
+    |{ type: "[CHAT] - Stop Loading", payload: boolean}
+    | { type: "[CHAT] - Delete Chat", payload: [] }; 
 
 
 export const chatReducer = (state: ChatState, action: ChatActionType): ChatState => {
@@ -23,15 +24,20 @@ export const chatReducer = (state: ChatState, action: ChatActionType): ChatState
                 messages: [...state.messages, action.payload ]
             }
         
-        case "[CHAT] - Start - Loading":
+        case "[CHAT] - Start Loading":
             return {
                 ...state,
                 loading: action.payload
             }
-        case "[CHAT] - Stop - Loading":
+        case "[CHAT] - Stop Loading":
             return {
                 ...state,
                 loading: action.payload
+            }
+        case "[CHAT] - Delete Chat":
+            return {
+                ...state,
+                messages: action.payload
             }
         default:
             return state;

@@ -5,7 +5,11 @@ import { TypingEffect } from './TypingEffect';
 
 export const SideBar = () => {
 
-  const { messages } = useContext(ChatContext); 
+  const { messages,deleteChat } = useContext(ChatContext); 
+
+  const handleDeleteChat = () => {
+    deleteChat();
+  }
 
   return (
     <div className='bg-gptdarkgray fixed flex flex-col w-[260px] h-screen text-slate-200'>
@@ -44,9 +48,9 @@ export const SideBar = () => {
         </div>
         <div className='divider mt-10' />
       </div>
-      <div className='flex flex-col gap-5 ml-4 mt-10'>
-        <div className='flex items-center'>
-          <div className='flex items-center'>
+      <div className='flex flex-col gap-5 ml-4 mt-10  mr-2'>
+        <div className='flex hover:bg-gptlightgray p-3 rounded-lg '>
+          <div className='flex items-center cursor-pointer' onClick={ handleDeleteChat } >
             <Image
               src='/delete.webp'
               alt='delete.webp'
@@ -58,21 +62,30 @@ export const SideBar = () => {
             </div>
           </div>
         </div>
-        <div className='flex items-center'>
-          <Image
-            src='/darkmode.webp'
-            alt='darkmode.webp'
-            width={20}
-            height={10}
-          />
-          <div className='ml-5 self-center'>
-            <span>Modo Oscuro</span>
+        <div className='flex p-3 hover:bg-gptlightgray rounded-lg'>
+          <div className='flex items-center'>
+            <Image
+              src='/darkmode.webp'
+              alt='darkmode.webp'
+              width={20}
+              height={10}
+            />
+            <div className='ml-5 self-center'>
+              <span>Modo Oscuro</span>
+            </div>
           </div>
         </div>
-        <div className='flex items-center'>
-          <Image src='/logout.webp' alt='logout.webp' width={20} height={10} />
-          <div className='ml-5 self-center'>
-            <span>Cerrar Sesión</span>
+        <div className='flex p-3 hover:bg-gptlightgray rounded-lg'>
+          <div className='flex items-center'>
+            <Image 
+              src='/logout.webp' 
+              alt='logout.webp' 
+              width={20} 
+              height={10} 
+            />
+            <div className='ml-5 self-center'>
+              <span>Cerrar Sesión</span>
+            </div>
           </div>
         </div>
       </div>

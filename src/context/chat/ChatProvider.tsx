@@ -34,14 +34,14 @@ export const ChatProvider:FC<ChatProviderProps> = ({ children }) => {
 
     const startLoading = () => {
         dispatch({
-            type: '[CHAT] - Start - Loading',
+            type: '[CHAT] - Start Loading',
             payload: true
         });
     }
     
     const stopLoading = () => {
         dispatch({
-            type: '[CHAT] - Stop - Loading',
+            type: '[CHAT] - Stop Loading',
             payload: false
         });
     }
@@ -82,7 +82,13 @@ export const ChatProvider:FC<ChatProviderProps> = ({ children }) => {
             type: '[CHAT] - Send Message',
             payload: iaResponse
         });
+    }
 
+    const deleteChat = () => {
+        dispatch({
+            type: '[CHAT] - Delete Chat',
+            payload: []
+        });
     }
 
 
@@ -93,6 +99,7 @@ export const ChatProvider:FC<ChatProviderProps> = ({ children }) => {
             ...state,
 
             sendMessage,
+            deleteChat
         }}>
             {children}
         </ChatContext.Provider>

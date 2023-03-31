@@ -6,6 +6,7 @@ interface ChatContextProps {
     loading: boolean;
 
     sendMessage: (message: Messages) => void;
+    deleteChat: () => void;
 }
 
 
