@@ -5,3 +5,4 @@ export * from "./SunIcon";
 export * from "./ThunderIcon"; 
 export * from "./WarningIcon";
 export * from "./GptIcon"; 
+export * from "./GoogleIcon"; 
