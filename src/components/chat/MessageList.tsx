@@ -1,23 +1,14 @@
+import { useContext } from 'react';
 import Image from 'next/image';
+import { ChatContext } from '@/context/chat';
 import { Avatar } from '../ui';
 
 export const MessageList = () => {
-  const chat = [
-    {
-      id: 1,
-      ia: false,
-      message: 'Hola'
-    },
-    {
-      id: 2,
-      ia: true,
-      message: 'Como estas?'
-    }
-  ];
+  const { messages } = useContext(ChatContext);
 
   return (
     <>
-      {chat.map((items) => (
+      {messages.map((items) => (
         <div
           key={items.id}
           className={`flex gap-4 p-8 w-3/4 m-auto ${

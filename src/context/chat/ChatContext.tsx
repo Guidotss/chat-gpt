@@ -1,10 +1,10 @@
 import { createContext } from "react"; 
+import { Messages } from "@/interfaces";
 
 interface ChatContextProps {
-    messages: string[];
-    ia: boolean;
+    messages: Messages[]; 
 
-    sendMessage: (message: string) => void;
+    sendMessage: (message: Messages) => void;
 }
 
 

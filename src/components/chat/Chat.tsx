@@ -1,21 +1,47 @@
+import { FormEvent, useContext, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MessageList,ChatDescription } from './';
+import { MessageList, ChatDescription } from './';
+import { ChatContext } from '@/context/chat';
 
 export const Chat = () => {
+  const { messages, sendMessage } = useContext(ChatContext);
+  const [value, setValue] = useState('');
+
+  const onSubmitMessage = (e: FormEvent) => {
+    e.preventDefault();
+    if (value.length > 0) {
+      const message = {
+        id: Math.random(),
+        message: value,
+        ia: false
+      };
+      setValue('');
+      sendMessage(message);
+    }
+  };
 
   return (
     <div className='flex flex-col h-full flex-1 pl-64 mt-10 text-white font-extralight'>
-        <ChatDescription />
+      {messages.length > 0 ? <MessageList /> : <ChatDescription />}
       <div className='absolute bottom-0 self-center w-1/3'>
         <div>
-          <form className='stretch mx-2 flex flex-row gap-3 last:mb-2 w-full'>
+          <form
+            className='stretch mx-2 flex flex-row gap-3 last:mb-2 w-full'
+            onSubmit={(e) => onSubmitMessage(e)}
+            onKeyDown={(e) => e.key == 'Enter' && onSubmitMessage(e)}
+          >
             <textarea
               tabIndex={0}
               rows={1}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
               className='flex-1 p-2 rounded-lg bg-gptlightgray w-3/4 text-white resize-none'
             />
-            <button className='absolute right-0 mt-[5px] hover:bg-gptdarkgray rounded-md p-1'>
+            <button
+              className='absolute right-0 mt-[5px] hover:bg-gptdarkgray rounded-md p-1'
+              type='submit'
+            >
               <Image src='/send.webp' alt='send' width={20} height={20} />
             </button>
           </form>
