@@ -2,13 +2,22 @@ import { useContext } from 'react';
 import Image from 'next/image';
 import { ChatContext } from '@/context/chat';
 import { TypingEffect } from './TypingEffect';
+import { AuthContext } from '@/context/auth';
+import { useRouter } from 'next/router';
 
 export const SideBar = () => {
 
   const { messages,deleteChat } = useContext(ChatContext); 
+  const { logout } = useContext(AuthContext); 
+  const router = useRouter(); 
 
   const handleDeleteChat = () => {
     deleteChat();
+  }
+
+  const handleLogout = () => {
+    logout();
+    router.push("/auth/login"); 
   }
 
   return (
@@ -75,7 +84,7 @@ export const SideBar = () => {
             </div>
           </div>
         </div>
-        <div className='flex p-3 hover:bg-gptlightgray rounded-lg'>
+        <div className='flex p-3 hover:bg-gptlightgray rounded-lg' onClick={handleLogout}>
           <div className='flex items-center'>
             <Image 
               src='/logout.webp' 
@@ -83,7 +92,7 @@ export const SideBar = () => {
               width={20} 
               height={10} 
             />
-            <div className='ml-5 self-center'>
+            <div className='ml-5 self-center cursor-pointer'>
               <span>Cerrar Sesión</span>
             </div>
           </div>

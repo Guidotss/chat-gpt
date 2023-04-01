@@ -86,6 +86,14 @@ export const AuthProvider:FC<AuthProviderProps> = ({ children }) => {
     }
 
 
+    const logout = () => {
+        Cookies.remove('token');
+        dispatch({
+            type: '[AUTH] - Logout',
+        });
+    }
+
+
     useEffect(() => {
         revalidateToken(); 
     },[]);
@@ -178,6 +186,7 @@ export const AuthProvider:FC<AuthProviderProps> = ({ children }) => {
 
             login,
             register,
+            logout,
             
         }}>
             { children }
