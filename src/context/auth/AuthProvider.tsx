@@ -39,7 +39,12 @@ export const AuthProvider:FC<AuthProviderProps> = ({ children }) => {
             const data = await checkUser.json();
 
             if(data.ok){
-                console.log(data);
+                const { user, token } = data;
+                dispatch({
+                    type:'[AUTH] - Login',
+                    payload: user,
+                }); 
+                Cookies.set('token', token);
             }
 
         }catch(err){
@@ -78,6 +83,93 @@ export const AuthProvider:FC<AuthProviderProps> = ({ children }) => {
             Cookies.remove('token');
             return false; 
         }   
+    }
+
+
+    useEffect(() => {
+        revalidateToken(); 
+    },[]);
+
+    const revalidateToken = async() => {
+        const token = Cookies.get('token');
+        if(!token){
+            dispatch({
+                type: '[AUTH] - Logout',
+            }); 
+            return;
+        }
+
+        try{
+            const response = await fetch("/api/auth/validate-token", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const data = await response.json();
+
+            if(data.ok){
+                const { user } = data;
+                dispatch({
+                    type:'[AUTH] - Login',
+                    payload: user,
+                }); 
+                Cookies.set('token', token);
+            }
+
+
+
+        }catch(err){
+            console.log(err);
+            Cookies.remove('token');
+            dispatch({
+                type: '[AUTH] - Logout',
+            }); 
+        }
+    }
+
+    useEffect(() => {
+        checkToken(); 
+    },[]); 
+
+
+    const checkToken = async() => {
+        try{
+            const token = Cookies.get('token');
+            if(!token){
+                dispatch({
+                    type: '[AUTH] - Logout',
+                });
+                return;
+            }
+
+            const response = await fetch("/api/auth/validate-token", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const data = await response.json();
+
+            if(data.ok){
+                const { user } = data;
+                dispatch({
+                    type:'[AUTH] - Login',
+                    payload: user,
+                }); 
+                Cookies.set('token', token);
+            }
+            
+
+        }catch(err){
+            console.log(err);
+            Cookies.remove('token');
+            dispatch({
+                type: '[AUTH] - Logout',
+            });
+        }
     }
 
     return (

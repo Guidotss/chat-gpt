@@ -11,7 +11,7 @@ export class UserService {
         this.user = User;
     }
 
-    private async hashPassword(password: string):Promise<string>{
+    private async hashPassword(password: string){
         try{
             const salt = await bcrypt.genSalt(10);
             const hash = await bcrypt.hash(password, salt);
@@ -23,7 +23,7 @@ export class UserService {
         }
     }
 
-    private async comparePassword(password: string, hash: string):Promise<boolean>{
+    private async comparePassword(password: string, hash: string){
         try{
             const result = await bcrypt.compare(password, hash);
             return result; 
@@ -34,7 +34,7 @@ export class UserService {
     }
     
 
-    public async register(name: string, email: string, password: string):Promise<IUser | boolean>{
+    public async register(name: string, email: string, password: string){
         try{
             
             if(!name || !email || !password) throw new Error("Missing fields");
@@ -59,13 +59,25 @@ export class UserService {
         }
     }
     
-    public async login(email:string, password:string):Promise<IUser | boolean>{
+    public async login(email:string, password:string){
         try{
             const user = await this.user.findOne({email:email}).lean();
             if(!user) return false;
 
             const result = await this.comparePassword(password, user.password);
             if(!result) return false;
+
+            return user; 
+
+        }catch(err){
+            throw new Error(`Internal server error:${err}`);
+        }
+    }
+
+    public async getUserById(id:string){
+        try{
+            const user = await this.user.findById(id).lean();
+            if(!user) return false;
 
             return user; 
 

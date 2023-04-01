@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { UserService } from '@/services';
 import { signDocument } from '@/jwt';
 import { IUser } from '@/interfaces';
+import "@/database/connect";
 
 type Data = 
     |{ ok:boolean,message: string }
