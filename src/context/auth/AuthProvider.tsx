@@ -1,4 +1,5 @@
-import { FC, useReducer } from "react"; 
+import { FC, useEffect, useReducer } from "react"; 
+import Cookies from 'js-cookie'; 
 import { authReducer, AuthContext } from "./"; 
 import { IUser } from "@/interfaces";
 
@@ -19,11 +20,33 @@ const AUTH_INITIAL_STATE: AuthState = {
 export const AuthProvider:FC<AuthProviderProps> = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE);
 
+    useEffect(() => {
+        console.log(state.user, state.isLogged); 
+    },[state.user, state.isLogged]); 
+
+
+
     const login = async(user: IUser) => {
-        dispatch({
-            type: "[AUTH] - Login",
-            payload: user,
-        });
+        try{
+            const checkUser = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(user),
+            }); 
+
+            const data = await checkUser.json();
+
+            if(data.ok){
+                console.log(data);
+            }
+
+        }catch(err){
+            console.log(err);
+            Cookies.remove('token');
+            return false; 
+        }
 
         return true; 
     }
@@ -31,7 +54,6 @@ export const AuthProvider:FC<AuthProviderProps> = ({ children }) => {
     const register = async(user: IUser):Promise<boolean> => {
 
         try{
-
             const newUser = await fetch("/api/auth/register", {
                 method: "POST",
                 headers: {
@@ -40,15 +62,22 @@ export const AuthProvider:FC<AuthProviderProps> = ({ children }) => {
                 body: JSON.stringify(user),
             }); 
             const data = await newUser.json();
-            return true; 
             
-            
+            if(data.ok){
+                const { user, token } = data;
+                dispatch({
+                    type:'[AUTH] - Login',
+                    payload: user,
+                }); 
+                Cookies.set('token', token);
+                
+            }
+            return true;    
         }catch(err){
-            
             console.log(err);
+            Cookies.remove('token');
             return false; 
-        }
-        
+        }   
     }
 
     return (

@@ -5,7 +5,7 @@ import { signDocument } from '@/jwt';
 
 type Data = 
     |{ ok:boolean,message: string }
-    |{ ok:boolean,message: string, user: {name:string, email:string}}
+    |{ ok:boolean,message: string, user: {name:string, email:string},token:string}
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
@@ -25,14 +25,11 @@ const register = async(req:NextApiRequest, res:NextApiResponse<Data>) => {
         const user = await userService.register(name, email, password);
 
         if(!user) return res.status(400).json({ok:false, message: "User not created"});
-        
-        
-        const { _id } = user;
-
+         
+        const { _id } = user; 
         const token = signDocument(_id!, email);
 
-        res.setHeader("Authorization", token);
-        return res.status(200).json({ok:true,message: "User created", user:{email, name}});
+        return res.status(200).json({ok:true,message: "User created", user:{email, name},token});
 
     }catch(err){
         return res.status(500).json({ok:false, message: `Internal server error: ${err}`});

@@ -12,6 +12,7 @@ export const TypingEffect:FC<TypingEffectProps> = ({ text }) => {
     const [ showCursor, setShowCursor ] = useState(true);
     const { loading } = useContext(ChatContext);
 
+
     useEffect(() => {
 
         if(!text.length) return;

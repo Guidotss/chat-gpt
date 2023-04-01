@@ -3,6 +3,8 @@ import { AuthState } from "./";
 
 type AuthActionTypes =
     | { type: '[AUTH] - Login'; payload: IUser }
+    
+
 
 
 export const authReducer = (state: AuthState, action: AuthActionTypes): AuthState => {
@@ -10,8 +12,11 @@ export const authReducer = (state: AuthState, action: AuthActionTypes): AuthStat
         case '[AUTH] - Login':
             return {
                 ...state,
-                isLogged: true
+                isLogged: true,
+                user: action.payload
             }
+        
+
         default:
             return state;
     }

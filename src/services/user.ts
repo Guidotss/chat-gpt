@@ -59,5 +59,19 @@ export class UserService {
         }
     }
     
+    public async login(email:string, password:string):Promise<IUser | boolean>{
+        try{
+            const user = await this.user.findOne({email:email}).lean();
+            if(!user) return false;
+
+            const result = await this.comparePassword(password, user.password);
+            if(!result) return false;
+
+            return user; 
+
+        }catch(err){
+            throw new Error(`Internal server error:${err}`);
+        }
+    }
 
 }
