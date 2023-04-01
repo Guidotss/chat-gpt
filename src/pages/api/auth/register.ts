@@ -1,12 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { UserService } from "@/services"; 
-import { IUser } from '@/interfaces';
 import "@/database/connect"; 
 import { signDocument } from '@/jwt';
 
 type Data = 
-    |{ message: string }
-    |{ message: string, user: {name:string, email:string}, token:string }
+    |{ ok:boolean,message: string }
+    |{ ok:boolean,message: string, user: {name:string, email:string}}
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
@@ -14,7 +13,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
         case "POST": 
             return register(req, res); 
         default:
-            return res.status(405).json({message: "Method not allowed"}); 
+            return res.status(405).json({ok:false, message: "Method not allowed"}); 
     }
 }
 
@@ -25,14 +24,17 @@ const register = async(req:NextApiRequest, res:NextApiResponse<Data>) => {
         const userService = new UserService();
         const user = await userService.register(name, email, password);
 
-        if(!user) throw new Error("Internal server error");
+        if(!user) return res.status(400).json({ok:false, message: "User not created"});
+        
         
         const { _id } = user;
 
-        const token = signDocument(_id, email);
-        return res.status(200).json({message: "User created", user:{email, name}, token});
+        const token = signDocument(_id!, email);
+
+        res.setHeader("Authorization", token);
+        return res.status(200).json({ok:true,message: "User created", user:{email, name}});
 
     }catch(err){
-        return res.status(500).json({message: `Internal server error: ${err}`});
+        return res.status(500).json({ok:false, message: `Internal server error: ${err}`});
     }
 }

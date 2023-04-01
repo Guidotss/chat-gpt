@@ -34,19 +34,18 @@ export class UserService {
     }
     
 
-    public async register(name: string, email: string, password: string):Promise<IUser>{
+    public async register(name: string, email: string, password: string):Promise<IUser | boolean>{
         try{
             
             if(!name || !email || !password) throw new Error("Missing fields");
             if(password.length < 6) throw new Error("Password must be at least 6 characters long");
             if(!email.includes("@")) throw new Error("Invalid email address");
             
-            
-            
-            const user = await this.user.find({email:email}).lean(); 
-            console.log(user);
 
-            if(!user) throw new Error("User already exists"); 
+            const user = await this.user.find({email:email}).lean(); 
+            if(JSON.stringify(user) !== "[]" ){
+                return false; 
+            }
 
 
             const hash = await this.hashPassword(password);

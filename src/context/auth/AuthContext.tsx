@@ -6,6 +6,7 @@ interface AuthContextProps {
     user?: IUser; 
 
     login: (user: IUser) => Promise<boolean>; 
+    register: (user: IUser) => Promise<boolean>;
 }
 
 

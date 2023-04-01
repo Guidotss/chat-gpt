@@ -28,12 +28,35 @@ export const AuthProvider:FC<AuthProviderProps> = ({ children }) => {
         return true; 
     }
 
+    const register = async(user: IUser):Promise<boolean> => {
+
+        try{
+
+            const newUser = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(user),
+            }); 
+            const data = await newUser.json();
+            return true; 
+            
+            
+        }catch(err){
+            
+            console.log(err);
+            return false; 
+        }
+        
+    }
 
     return (
         <AuthContext.Provider value={{ 
             ...state, 
 
             login,
+            register,
             
         }}>
             { children }
