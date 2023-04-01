@@ -2,6 +2,8 @@ import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthLayOut } from '@/components';
 import { AuthContext } from '@/context/auth';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 type FormDataType = {
   name: string;
@@ -11,16 +13,23 @@ type FormDataType = {
 
 const RegisterPage = () => {
   const [showErrors, setShowErrors] = useState<boolean>(false);
-  const {register,handleSubmit,formState: { errors }} = useForm<FormDataType>();
-  const { register:registerUser } = useContext(AuthContext); 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormDataType>();
+  const { register: registerUser } = useContext(AuthContext);
+  const router = useRouter();
 
-  const onSubmit = async(data: FormDataType) => {
+  const onSubmit = async (data: FormDataType) => {
     const { name, email, password } = data;
     const ok = await registerUser({ name, email, password });
-    if(!ok){
+    if (!ok) {
       setShowErrors(true);
+      return;
     }
-  }
+    router.replace('/');
+  };
 
   return (
     <AuthLayOut
@@ -31,7 +40,10 @@ const RegisterPage = () => {
         <h1 className='text-4xl text-gray-50 mb-10 text-center mt-[15vh]'>
           Registrarse
         </h1>
-        <form className='flex flex-col items-center' onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className='flex flex-col items-center'
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className='mb-4 flex flex-col'>
             <label
               className='block text-gray-50 text-sm font-semibold mb-2'
@@ -53,7 +65,9 @@ const RegisterPage = () => {
               })}
             />
             {errors.name && (
-              <span className='text-red-500 text-sm'>{errors.name.message}</span>
+              <span className='text-red-500 text-sm'>
+                {errors.name.message}
+              </span>
             )}
           </div>
           <div className='mb-4 flex flex-col'>
@@ -77,7 +91,9 @@ const RegisterPage = () => {
               })}
             />
             {errors.email && (
-              <span className='text-red-500 text-sm'>{errors.email.message}</span>
+              <span className='text-red-500 text-sm'>
+                {errors.email.message}
+              </span>
             )}
           </div>
           <div className='mb-4 flex flex-col'>
@@ -99,7 +115,6 @@ const RegisterPage = () => {
                   message: 'El password debe tener al menos 6 caracteres'
                 }
               })}
-
             />
             {errors.password && (
               <span className='text-red-500 text-sm'>
@@ -114,7 +129,13 @@ const RegisterPage = () => {
             Registrarse
           </button>
         </form>
-          
+        <Link
+          href='/auth/login'
+          passHref
+          legacyBehavior
+        >
+          <a className='flex justify-end mr-10 text-gray-50 underline mt-5'>¿Ya tienes cuenta?</a>
+        </Link>
       </div>
     </AuthLayOut>
   );
