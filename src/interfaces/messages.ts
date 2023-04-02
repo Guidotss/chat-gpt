@@ -1,5 +1,5 @@
 export interface Messages {
-    id: number;
-    message: string;
-    ia: boolean;
+  id: number;
+  message: string;
+  ia: boolean;
 }

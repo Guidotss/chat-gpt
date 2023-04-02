@@ -5,7 +5,6 @@ import { ChatContext } from '@/context/chat';
 import { MessageList, ChatDescription } from './';
 
 export const Chat = () => {
-
   const { messages, sendMessage } = useContext(ChatContext);
   const [value, setValue] = useState('');
 
@@ -22,9 +21,6 @@ export const Chat = () => {
     }
   };
 
-
-
-
   return (
     <div className='flex flex-col h-full flex-1 pl-64 mt-10 text-white font-extralight overflow-auto'>
       {messages.length > 0 ? <MessageList /> : <ChatDescription />}
@@ -38,7 +34,7 @@ export const Chat = () => {
             <textarea
               tabIndex={0}
               rows={1}
-              name="prompt"
+              name='prompt'
               value={value}
               onChange={(e) => setValue(e.target.value)}
               className='flex-1 p-2 rounded-lg bg-gptlightgray w-3/4 text-white resize-none'

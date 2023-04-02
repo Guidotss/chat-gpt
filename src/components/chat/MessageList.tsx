@@ -5,7 +5,7 @@ import { Avatar, TypingEffect } from '../ui';
 import { GptIcon } from '../ui/GptIcon';
 
 export const MessageList = () => {
-  const { messages,loading } = useContext(ChatContext);
+  const { messages, loading } = useContext(ChatContext);
 
   return (
     <div className='h-[70vh] overflow-auto sidebar-scroll-bar'>
@@ -17,20 +17,17 @@ export const MessageList = () => {
           }`}
         >
           <Avatar>
-            {
-              message.ia ? (
-                <GptIcon/>
-              ) : (
-                <Image
-                  src='/avatar.webp'
-                  alt='user'
-                  width={40}
-                  height={40}
-                  className='rounded-lg'
-
-                />
-              )
-            }
+            {message.ia ? (
+              <GptIcon />
+            ) : (
+              <Image
+                src='/avatar.webp'
+                alt='user'
+                width={40}
+                height={40}
+                className='rounded-lg'
+              />
+            )}
           </Avatar>
           <p className='self-center'>
             {message.ia ? (
@@ -42,18 +39,14 @@ export const MessageList = () => {
         </div>
       ))}
 
-      {
-        loading && (
-          <div className='flex gap-4 p-8 w-3/4 m-auto'>
-            <Avatar>
-              <GptIcon/>
-            </Avatar>
-            <p className='self-center animate-pulse'>
-              ▋
-            </p>
-          </div>
-        )
-      }
+      {loading && (
+        <div className='flex gap-4 p-8 w-3/4 m-auto'>
+          <Avatar>
+            <GptIcon />
+          </Avatar>
+          <p className='self-center animate-pulse'>▋</p>
+        </div>
+      )}
     </div>
   );
 };

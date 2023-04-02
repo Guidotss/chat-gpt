@@ -1,5 +1,4 @@
-import { SunIcon, ThunderIcon,WarningIcon } from "../ui";
-
+import { SunIcon, ThunderIcon, WarningIcon } from '../ui';
 
 export const ChatDescription = () => {
   return (
@@ -10,7 +9,7 @@ export const ChatDescription = () => {
       <div className='grid grid-cols-3 gap-3 items-center'>
         <div className='grid-col-1'>
           <div className='flex justify-center'>
-            <SunIcon/>
+            <SunIcon />
           </div>
           <span className='text-gray-50 text-xl flex justify-center'>
             Ejemplos
@@ -31,7 +30,7 @@ export const ChatDescription = () => {
         </div>
         <div className='grid-col-2'>
           <div className='flex justify-center'>
-            <ThunderIcon/>
+            <ThunderIcon />
           </div>
           <span className='text-gray-50 text-xl flex justify-center'>
             Capacidades
@@ -52,7 +51,7 @@ export const ChatDescription = () => {
         </div>
         <div className='grid-col-3'>
           <div className='flex justify-center'>
-            <WarningIcon/>
+            <WarningIcon />
           </div>
           <span className='text-xl text-gray-50 flex justify-center'>
             Limitaciones

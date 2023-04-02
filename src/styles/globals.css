@@ -1,4 +1,4 @@
-@tailwind base; 
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -8,7 +8,7 @@
 }
 .sidebar-scroll-bar::-webkit-scrollbar-thumb {
   background: #444654;
-    border-radius: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .divider {
