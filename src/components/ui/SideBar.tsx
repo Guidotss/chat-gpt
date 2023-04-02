@@ -6,6 +6,8 @@ import { TypingEffect } from './TypingEffect';
 import { AuthContext } from '@/context/auth';
 import { UiContext } from '@/context/ui';
 import { SunIcon } from './SunIcon';
+import { SettingIcon } from './SettingIcon';
+import Link from 'next/link';
 
 export const SideBar = () => {
   const { messages, deleteChat } = useContext(ChatContext);
@@ -129,6 +131,15 @@ export const SideBar = () => {
             )}
           </div>
         </div>
+        <div className='flex p-3 hover:bg-gptlightgray rounded-lg'>
+          <div className='flex items-center cursor-pointer'>
+            <SettingIcon/>
+            <Link href="/settings" passHref legacyBehavior>
+              <a className='ml-5 self-center' >Configuración</a>
+            </Link>
+          </div>
+        </div>
+
         <div
           className='flex p-3 hover:bg-gptlightgray rounded-lg'
           onClick={handleLogout}

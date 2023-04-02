@@ -9,7 +9,7 @@ type Data =
   | {
       ok: boolean;
       message: string;
-      user: { name?: string; email: string };
+      user: { name?: string; email: string; avatar?:string };
       token: string;
     };
 
@@ -46,7 +46,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     return res.status(200).json({
       ok: true,
       message: 'Login successful',
-      user: { name, email },
+      user: { name, email, avatar:user.avatar },
       token
     });
   } catch (err) {

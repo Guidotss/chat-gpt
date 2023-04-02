@@ -6,3 +6,4 @@ export * from "./ThunderIcon";
 export * from "./WarningIcon";
 export * from "./GptIcon"; 
 export * from "./GoogleIcon"; 
+export * from "./SettingIcon"; 

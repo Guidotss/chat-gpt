@@ -7,7 +7,7 @@ export const ChatDescription = () => {
   const { theme } = useContext(UiContext)
 
   return (
-    <div className='flex flex-col items-center justify-center overflow-auto h-[70vh]'>
+    <div className='flex flex-col items-center justify-center overflow-auto 2xl:h-[70vh] snap-always'>
       <div className={`flex ${theme === 'dark' ? 'text-gray-50' : 'text-gray-950'} text-4xl font-semibold mb-10`}>
         <h1>ChatGPT</h1>
       </div>
