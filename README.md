@@ -25,7 +25,7 @@ yarn install
 3. Reemplazar el valor de la variable de entorno `MONGO_URL` con la URL de la base de datos de MongoDB.
 4. Reemplazar el valor de la variable de entorno `JWT_SECRET` con una cadena de texto aleatoria.
 
-Para ejecutar el proyecto de forma local, se deben ejecutar los  siguientes comando:
+Para ejecutar el proyecto de forma local, se deben ejecutar los  siguientes comandos:
 
 ```bash
 docker-compose up -d
@@ -57,6 +57,34 @@ yarn dev
 
 este comando ejecutará el proyecto en modo desarrollo.
 
+## Ejecutar en producción
+
+Para ejecutar el proyecto en producción, se deben ejecutar los siguientes comandos:
+
+```bash
+
+npm run build
+
+# o
+
+yarn build
+
+```
+
+este comando creará la carpeta `build` con el código compilado del proyecto.
+
+```bash
+
+npm run start
+
+# o
+
+yarn start
+
+```
+
+este comando ejecutará el proyecto en modo producción.
+
 
 ## Uso
 
@@ -74,6 +102,15 @@ Para usar el proyecto, se debe acceder a la ruta `http://localhost:3000/` y se p
 #### `UserService`
 
 Este servicio se encarga de manejar la lógica de negocio de los usuarios.
+
+##### Metodos de `UserService`
+
+- `hashPassword(password: string)` - Encripta una contraseña y retorna una promesa con el hash de la contraseña.
+-  `comparePassword(password: string, hash: string)` - Compara una contraseña con un hash y retorna una promesa con un booleano indicando si la contraseña es correcta.
+
+- `register(name:string, email:string, password:string)` - Registra un usuario en la base de datos y retorna una promesa con el usuario registrado o un booleano indicando si el usuario ya existe.
+- `login(email:string, password:string)` - Inicia sesión con un usuario y retorna una promesa con el usuario o un booleano indicando si el usuario no existe o la contraseña es incorrecta.
+- `getUserById(id:string)` - Retorna una promesa con un usuario o un booleano indicando si el usuario no existe.
 
 
 ## Tecnologías
