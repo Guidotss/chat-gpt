@@ -1,8 +1,14 @@
+import { UiContext } from "@/context/ui";
+import { useContext } from "react";
+
 export const SunIcon = () => {
+
+  const { theme } = useContext(UiContext); 
+
   return (
     <>
       <svg
-        className='h-6 w-6 mb-5'
+        className={`h-6 w-6 mb-5 ${theme === 'dark' ? '' : 'text-gray-950'}`}
         stroke='currentColor'
         fill='none'
         strokeWidth='1.5'

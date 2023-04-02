@@ -18,13 +18,11 @@ const LoginPage = () => {
     formState: { errors }
   } = useForm<FormDataType>();
   const { login } = useContext(AuthContext);
-  const [showErrors, setShowErrors] = useState<boolean>(false);
   const router = useRouter();
 
   const handleLogin = async ({ email, password }: FormDataType) => {
     const ok = await login({ email, password });
     if (!ok) {
-      setShowErrors(true);
       return;
     }
     router.replace('/');

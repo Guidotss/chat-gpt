@@ -1,6 +1,7 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import Head from 'next/head';
 import { SideBar } from '../index';
+import { UiContext } from '@/context/ui';
 
 interface ChatLayOutProps {
   children: React.ReactNode;
@@ -10,6 +11,9 @@ interface ChatLayOutProps {
 }
 
 export const ChatLayOut: FC<ChatLayOutProps> = ({ title,description,image,children }) => {
+
+  const { theme } = useContext(UiContext);
+
   return (
     <>
       <Head>
@@ -23,7 +27,7 @@ export const ChatLayOut: FC<ChatLayOutProps> = ({ title,description,image,childr
         {image && <meta name='og:image' content={image} />}
       </Head>
 
-      <main className='w-full h-screen bg-gptgray relative'>
+      <main className={`w-full h-screen relative ${theme === 'dark' ? 'bg-gptgray' : 'bg-gray-50'}`}>
         <SideBar />
         {children}
       </main>

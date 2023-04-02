@@ -5,11 +5,12 @@ import { ChatContext } from '@/context/chat';
 import { TypingEffect } from './TypingEffect';
 import { AuthContext } from '@/context/auth';
 import { UiContext } from '@/context/ui';
+import { SunIcon } from './SunIcon';
 
 export const SideBar = () => {
   const { messages, deleteChat } = useContext(ChatContext);
   const { logout } = useContext(AuthContext);
-  const { toggleTheme } = useContext(UiContext); 
+  const { toggleTheme, theme } = useContext(UiContext);
   const router = useRouter();
 
   const handleDeleteChat = () => {
@@ -23,8 +24,7 @@ export const SideBar = () => {
 
   const handleToggleTheme = () => {
     toggleTheme();
-  }
-
+  };
 
   return (
     <div className='bg-gptdarkgray fixed flex flex-col w-[260px] h-screen text-slate-200'>
@@ -82,16 +82,51 @@ export const SideBar = () => {
           </div>
         </div>
         <div className='flex p-3 hover:bg-gptlightgray rounded-lg'>
-          <div className='flex items-center cursor-pointer' onClick={handleToggleTheme}>
-            <Image
-              src='/darkmode.webp'
-              alt='darkmode.webp'
-              width={20}
-              height={10}
-            />
-            <div className='ml-5 self-center'>
-              <span>Modo Oscuro</span>
-            </div>
+          <div
+            className='flex items-center cursor-pointer'
+            onClick={handleToggleTheme}
+          >
+            {theme !== 'dark' ? (
+              <>
+                <Image
+                  src='/darkmode.webp'
+                  alt='darkmode.webp'
+                  width={20}
+                  height={10}
+                />
+                <div className='ml-5 self-center'>
+                  <span>Modo Oscuro</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <svg
+                  className={`h-6 w-6`}
+                  stroke='currentColor'
+                  fill='none'
+                  strokeWidth='1.5'
+                  viewBox='0 0 24 24'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  height='1em'
+                  width='1em'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <circle cx='12' cy='12' r='5'></circle>
+                  <line x1='12' y1='1' x2='12' y2='3'></line>
+                  <line x1='12' y1='21' x2='12' y2='23'></line>
+                  <line x1='4.22' y1='4.22' x2='5.64' y2='5.64'></line>
+                  <line x1='18.36' y1='18.36' x2='19.78' y2='19.78'></line>
+                  <line x1='1' y1='12' x2='3' y2='12'></line>
+                  <line x1='21' y1='12' x2='23' y2='12'></line>
+                  <line x1='4.22' y1='19.78' x2='5.64' y2='18.36'></line>
+                  <line x1='18.36' y1='5.64' x2='19.78' y2='4.22'></line>
+                </svg>
+                <div className='ml-5 self-center'>
+                  <span>Modo Claro</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div

@@ -1,8 +1,14 @@
+import { UiContext } from "@/context/ui";
+import { useContext } from "react";
+
 export const ThunderIcon = () => {
+
+  const { theme } = useContext(UiContext)
+
   return (
     <>
       <svg
-        className='h-6 w-6 mb-5'
+        className={`h-6 w-6 mb-5 ${theme === 'dark' ? '' : 'text-gray-950'}`}
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
         viewBox='0 0 24 24'

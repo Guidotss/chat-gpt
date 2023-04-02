@@ -3,10 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChatContext } from '@/context/chat';
 import { MessageList, ChatDescription } from './';
+import { UiContext } from '@/context/ui';
 
 export const Chat = () => {
   const { messages, sendMessage } = useContext(ChatContext);
   const [value, setValue] = useState('');
+  const { theme } = useContext(UiContext)
 
   const onSubmitMessage = (e: FormEvent) => {
     e.preventDefault();
@@ -37,7 +39,7 @@ export const Chat = () => {
               name='prompt'
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              className='flex-1 p-2 rounded-lg bg-gptlightgray w-3/4 text-white resize-none'
+              className={`flex-1 p-2 rounded-lg ${theme === 'dark' ? 'bg-gptlightgray shadow-lg' : 'bg-slate-200 shadow-lg shadow-gray-400'} w-3/4 text-white resize-none`}
             />
             <button
               className='absolute right-0 mt-[5px] hover:bg-gptdarkgray rounded-md p-1'
