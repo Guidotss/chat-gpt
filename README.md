@@ -20,7 +20,7 @@ yarn install
 
 ## Ejecución
 
-1. Cabiar el nombre del archivo `.template.env` a `.env` y agregar las variables de entorno.
+1. Cambiar el nombre del archivo `.template.env` a `.env` y agregar las variables de entorno.
 2. Reemplazar el valor de la variable `OPENAI_API_KEY` con la API key de OpenAI.
 3. Reemplazar el valor de la variable de entorno `MONGO_URL` con la URL de la base de datos de MongoDB.
 4. Reemplazar el valor de la variable de entorno `JWT_SECRET` con una cadena de texto aleatoria.
