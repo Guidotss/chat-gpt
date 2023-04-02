@@ -122,7 +122,6 @@ Este servicio se encarga de manejar la lógica de negocio de los usuarios.
 - [OpenAI](https://openai.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 - [JWT](https://jwt.io/)
-- [Axios](https://axios-http.com/)
 - [Mongoose](https://mongoosejs.com/)
 - [Bcrypt](https://www.npmjs.com/package/bcrypt)
 ## Licencia
