@@ -4,10 +4,12 @@ import { useRouter } from 'next/router';
 import { ChatContext } from '@/context/chat';
 import { TypingEffect } from './TypingEffect';
 import { AuthContext } from '@/context/auth';
+import { UiContext } from '@/context/ui';
 
 export const SideBar = () => {
   const { messages, deleteChat } = useContext(ChatContext);
   const { logout } = useContext(AuthContext);
+  const { toggleTheme } = useContext(UiContext); 
   const router = useRouter();
 
   const handleDeleteChat = () => {
@@ -18,6 +20,11 @@ export const SideBar = () => {
     logout();
     router.push('/auth/login');
   };
+
+  const handleToggleTheme = () => {
+    toggleTheme();
+  }
+
 
   return (
     <div className='bg-gptdarkgray fixed flex flex-col w-[260px] h-screen text-slate-200'>
@@ -75,7 +82,7 @@ export const SideBar = () => {
           </div>
         </div>
         <div className='flex p-3 hover:bg-gptlightgray rounded-lg'>
-          <div className='flex items-center'>
+          <div className='flex items-center cursor-pointer' onClick={handleToggleTheme}>
             <Image
               src='/darkmode.webp'
               alt='darkmode.webp'
