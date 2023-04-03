@@ -3,9 +3,11 @@ import Image from 'next/image';
 import { ChatContext } from '@/context/chat';
 import { Avatar, TypingEffect } from '../ui';
 import { GptIcon } from '../ui/GptIcon';
+import { AuthContext } from '@/context/auth';
 
 export const MessageList = () => {
   const { messages, loading } = useContext(ChatContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <div className='h-[70vh] overflow-auto sidebar-scroll-bar'>
@@ -21,11 +23,11 @@ export const MessageList = () => {
               <GptIcon />
             ) : (
               <Image
-                src='/avatar.webp'
+                src={`${user?.avatar ? user?.avatar : '/avatar.webp'}`}
                 alt='user'
                 width={40}
                 height={40}
-                className='rounded-lg'
+                className='rounded-md'
               />
             )}
           </Avatar>

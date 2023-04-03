@@ -5,7 +5,7 @@ import '@/database/connect';
 
 type Data =
   | { message: string }
-  | { ok: boolean; token: string; user: { name?: string; email: string, avatar?:string } };
+  | { ok: boolean; token: string; user: { name?: string; email: string, avatar?:string,id:string } };
 
 export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
   switch (req.method) {
@@ -33,7 +33,7 @@ const validateToken = async (req: NextApiRequest,res: NextApiResponse<Data>) => 
       .json({
         ok: true,
         token: newToken,
-        user: { name: user.name, email: user.email, avatar:user.avatar }
+        user: { name: user.name, email: user.email, avatar:user.avatar, id:user._id }
       });
   } catch (err) {
     return res.status(500).json({ message: `Internal server error: ${err}` });

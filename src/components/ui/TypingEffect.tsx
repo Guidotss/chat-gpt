@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useContext } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 interface TypingEffectProps {
   text: string;
@@ -38,7 +38,7 @@ export const TypingEffect: FC<TypingEffectProps> = ({ text }) => {
     <span
       className={`${
         showCursor ? 'after:content-["▋"] after:ml-1 after:animate-pulse' : ''
-      }`}
+      } text-md font-semibold`}
     >
       {dislpayText}
     </span>

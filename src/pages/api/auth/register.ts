@@ -8,7 +8,7 @@ type Data =
   | {
       ok: boolean;
       message: string;
-      user: { name: string; email: string, avatar?:string };
+      user: { name: string; email: string, avatar?:string, id:string };
       token: string;
     };
 
@@ -39,7 +39,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       .json({
         ok: true,
         message: 'User created',
-        user: { email, name, avatar:user.avatar },
+        user: { email, name, avatar:user.avatar, id:_id! },
         token
       });
   } catch (err) {

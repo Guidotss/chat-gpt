@@ -74,4 +74,34 @@ export class UserService {
       throw new Error(`Internal server error:${err}`);
     }
   }
+
+  public async updateUSerInfo(id?: string,name?: string,email?: string,imageUrl?: string, password?: string) {
+    try {
+      const user = await this.user.findById(id).lean();
+
+      if (!user) return false;
+
+      if (name && name !== '') {
+        user.name = name;
+      }
+      if (email && email !== '') {
+        user.email = email;
+      }
+      if (imageUrl && imageUrl !== '') {
+        user.avatar = imageUrl;
+      }
+      if (password && password !== '') {
+        const hash = await this.hashPassword(password);
+        user.password = hash;
+      }
+
+      const updatedUser = await this.user
+        .findByIdAndUpdate(id, user, { new: true })
+        .lean();
+      return updatedUser;
+
+    } catch (err) {
+      throw new Error(`Internal server error:${err}`);
+    }
+  }
 }

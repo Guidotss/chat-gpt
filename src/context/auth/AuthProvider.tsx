@@ -2,6 +2,7 @@ import { FC, useEffect, useReducer } from 'react';
 import Cookies from 'js-cookie';
 import { authReducer, AuthContext } from './';
 import { IUser } from '@/interfaces';
+import { updateImage } from '@/utils'; 
 
 export interface AuthState {
   isLogged: boolean;
@@ -86,6 +87,50 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       type: '[AUTH] - Logout'
     });
   };
+
+  const updateUser = async (id:string,name?: string,email?:string,avatar?:File,password?: string) => {
+
+    const token = Cookies.get('token');
+    if (!token) {
+      dispatch({
+        type: '[AUTH] - Logout'
+      });
+      return;
+    }
+    
+    try{
+      let imageUrl = '';
+      
+      if(avatar) imageUrl = await updateImage(avatar);
+
+
+      const response = await fetch('/api/auth/update-user', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id,name,email,password,imageUrl})
+      });
+      const data = await response.json();
+
+      if (data.ok) {
+        const { user } = data;
+        dispatch({
+          type: '[AUTH] - Login',
+          payload: user
+        });
+        Cookies.set('token', token);
+      }
+
+    }catch(err){
+      console.log(err);
+      Cookies.remove('token');
+      dispatch({
+        type: '[AUTH] - Logout'
+      });
+    }
+  };
+
 
   useEffect(() => {
     revalidateToken();
@@ -174,7 +219,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
         login,
         register,
-        logout
+        logout,
+        updateUser,
       }}
     >
       {children}
