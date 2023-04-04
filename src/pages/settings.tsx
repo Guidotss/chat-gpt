@@ -8,7 +8,7 @@ type userUpdate = {
   name?: string;
   email?: string;
   password?: string; 
-  avatar?: File; 
+  avatar?: FileList; 
 };
 
 const SettingsPage = () => {
@@ -20,8 +20,9 @@ const SettingsPage = () => {
 
     const avatarFile = avatar && avatar[0];
 
+
     try{
-      await updateUser(user?.id!,name, email,avatarFile,password);
+      await updateUser(user?._id!,name, email,avatarFile,password);
       router.push('/');
     }catch(err){
       console.log(err);
@@ -104,6 +105,7 @@ const SettingsPage = () => {
           <div className='mt-4'>
             <label
               htmlFor='password'
+              
               className='block text-sm font-medium text-gray-50'
             >
               Contraseña

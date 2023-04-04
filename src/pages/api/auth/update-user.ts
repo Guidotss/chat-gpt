@@ -5,7 +5,7 @@ import { couldStartTrivia } from 'typescript';
 type Data = {
   ok: boolean;
   message: string;
-  user: { name?: string; email: string; avatar?: string; id: string } | null;
+  user: { name?: string; email: string; avatar?: string; _id: string } | null;
 };
 
 export default function handler(
@@ -23,14 +23,14 @@ export default function handler(
 }
 
 const UpdateUser = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  const { name, email, password, id,imageUrl } = req.body;
-
-  console.log(imageUrl); 
+  const { name, email, password, _id,imageUrl } = req.body;
+  console.log(_id);
 
   try {
     const userService = new UserService();
 
-    const user = await userService.updateUSerInfo(id,name,email,imageUrl,password);
+    const user = await userService.updateUSerInfo(_id,name,email,imageUrl,password);
+
     if (!user)
       return res
         .status(400)
@@ -41,7 +41,7 @@ const UpdateUser = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       .json({
         ok: true,
         message: 'User updated',
-        user: { name, email, id, avatar: imageUrl }
+        user: { name, email, _id:_id!, avatar: imageUrl }
       });
   } catch (err) {
     console.log(err);

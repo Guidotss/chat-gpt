@@ -21,9 +21,6 @@ const AUTH_INITIAL_STATE: AuthState = {
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE);
 
-  useEffect(() => {
-    console.log(state.user, state.isLogged);
-  }, [state.user, state.isLogged]);
 
   const login = async (user: IUser) => {
     try {
@@ -88,7 +85,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     });
   };
 
-  const updateUser = async (id:string,name?: string,email?:string,avatar?:File,password?: string) => {
+  const updateUser = async (_id:string,name?: string,email?:string,avatar?:File,password?: string) => {
 
     const token = Cookies.get('token');
     if (!token) {
@@ -109,7 +106,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({id,name,email,password,imageUrl})
+        body: JSON.stringify({_id,name,email,password,imageUrl})
       });
       const data = await response.json();
 

@@ -29,7 +29,7 @@ export const SideBar = () => {
   };
 
   return (
-    <div className='bg-gptdarkgray fixed flex flex-col w-[260px] h-screen text-slate-200'>
+    <aside className='bg-gptdarkgray fixed flex flex-col w-[260px] h-screen text-slate-200'>
       <div className='overflow-auto sidebar-scroll-bar flex flex-col'>
         <div className='flex border-[1px] p-2 rounded-md w-[240px] self-center mt-5 shadow-sm shadow-gptlightgray'>
           <Image
@@ -66,7 +66,7 @@ export const SideBar = () => {
         </div>
         <div className='divider mt-10' />
       </div>
-      <div className='flex flex-col gap-5 ml-4 mt-10  mr-2'>
+      <nav className='flex flex-col gap-5 ml-4 mt-10  mr-2'>
         <div className='flex hover:bg-gptlightgray p-3 rounded-lg '>
           <div
             className='flex items-center cursor-pointer'
@@ -156,7 +156,7 @@ export const SideBar = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </nav>
+    </aside>
   );
 };
