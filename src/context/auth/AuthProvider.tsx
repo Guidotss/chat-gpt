@@ -2,7 +2,7 @@ import { FC, useEffect, useReducer } from 'react';
 import Cookies from 'js-cookie';
 import { authReducer, AuthContext } from './';
 import { IUser } from '@/interfaces';
-import { updateImage } from '@/utils'; 
+import { updateImage } from '@/utils';
 
 export interface AuthState {
   isLogged: boolean;
@@ -21,7 +21,6 @@ const AUTH_INITIAL_STATE: AuthState = {
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE);
 
-
   const login = async (user: IUser) => {
     try {
       const checkUser = await fetch('/api/auth/login', {
@@ -31,7 +30,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         },
         body: JSON.stringify(user)
       });
-
       const data = await checkUser.json();
 
       if (data.ok) {
@@ -41,17 +39,16 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           payload: user
         });
         Cookies.set('token', token);
+        return true;
       }
     } catch (err) {
       console.log(err);
       Cookies.remove('token');
-      return false;
     }
-
-    return true;
+    return false;
   };
 
-  const register = async (user: IUser): Promise<boolean> => {
+  const register = async (user: IUser) => {
     try {
       const newUser = await fetch('/api/auth/register', {
         method: 'POST',
@@ -69,13 +66,14 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
           payload: user
         });
         Cookies.set('token', token);
+        return true;
       }
-      return true;
+
     } catch (err) {
       console.log(err);
       Cookies.remove('token');
-      return false;
     }
+    return false; 
   };
 
   const logout = () => {
@@ -85,8 +83,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     });
   };
 
-  const updateUser = async (_id:string,name?: string,email?:string,avatar?:File,password?: string) => {
-
+  const updateUser = async (_id: string,name?: string,email?: string,avatar?: File,password?: string) => {
     const token = Cookies.get('token');
     if (!token) {
       dispatch({
@@ -94,19 +91,18 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       });
       return;
     }
-    
-    try{
-      let imageUrl = '';
-      
-      if(avatar) imageUrl = await updateImage(avatar);
 
+    try {
+      let imageUrl = '';
+
+      if (avatar) imageUrl = await updateImage(avatar);
 
       const response = await fetch('/api/auth/update-user', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({_id,name,email,password,imageUrl})
+        body: JSON.stringify({ _id, name, email, password, imageUrl })
       });
       const data = await response.json();
 
@@ -118,8 +114,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         });
         Cookies.set('token', token);
       }
-
-    }catch(err){
+    } catch (err) {
       console.log(err);
       Cookies.remove('token');
       dispatch({
@@ -127,7 +122,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       });
     }
   };
-
 
   useEffect(() => {
     revalidateToken();
@@ -217,7 +211,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         login,
         register,
         logout,
-        updateUser,
+        updateUser
       }}
     >
       {children}

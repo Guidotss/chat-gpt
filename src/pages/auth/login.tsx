@@ -12,21 +12,21 @@ type FormDataType = {
 };
 
 const LoginPage = () => {
-  const {
-    handleSubmit,
-    register,
-    formState: { errors }
-  } = useForm<FormDataType>();
+  const { handleSubmit,register,formState: { errors } } = useForm<FormDataType>();
+  const [ errorMessage, setErrorMessage ] = useState<string>();
+  const [ showErrorMessage, setShowErrorMessage ] = useState<boolean>(false);
   const { login } = useContext(AuthContext);
   const router = useRouter();
 
   const handleLogin = async ({ email, password }: FormDataType) => {
     const ok = await login({ email, password });
-    if (!ok) {
-      return;
+    if (ok) {
+      router.push('/');
     }
-    router.replace('/');
-  };
+    setShowErrorMessage(true);
+    setErrorMessage('El usuario o la contraseña son incorrectos');
+    return; 
+  }; 
 
   return (
     <AuthLayOut
@@ -37,6 +37,16 @@ const LoginPage = () => {
         <h1 className='text-4xl text-gray-50 mb-10 text-center mt-[15vh]'>
           Iniciar Sesión
         </h1>
+        {
+          showErrorMessage && (
+            <div className='flex justify-center'>
+              <span className='text-red-500 text-xs italic mb-5'>
+                {errorMessage}
+              </span>
+            </div>
+          )
+        }
+
         <form
           className='flex flex-col items-center justify-center'
           onSubmit={handleSubmit(handleLogin)}

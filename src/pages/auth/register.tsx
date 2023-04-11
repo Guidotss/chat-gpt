@@ -13,22 +13,25 @@ type FormDataType = {
 
 const RegisterPage = () => {
   const [showErrors, setShowErrors] = useState<boolean>(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormDataType>();
+  const [ errorMessage, setErrorMessage ] = useState<string>('');
+  const {register,handleSubmit,formState: { errors }} = useForm<FormDataType>();
   const { register: registerUser } = useContext(AuthContext);
   const router = useRouter();
 
   const onSubmit = async (data: FormDataType) => {
     const { name, email, password } = data;
     const ok = await registerUser({ name, email, password });
-    if (!ok) {
-      setShowErrors(true);
+    if (ok) {
+      setShowErrors(false);
+      router.replace('/'); 
       return;
     }
-    router.replace('/');
+    setShowErrors(true);
+    setErrorMessage('Ya existe un usuario con ese email');
+    setTimeout(() => {
+      setShowErrors(false);
+    }, 3000);
+    return; 
   };
 
   return (
@@ -40,6 +43,15 @@ const RegisterPage = () => {
         <h1 className='text-4xl text-gray-50 mb-10 text-center mt-[15vh]'>
           Registrarse
         </h1>
+        {
+          showErrors && (
+            <div className='flex justify-center'>
+              <span className='text-red-500 text-xs italic mb-5'>
+                {errorMessage}
+              </span>
+            </div>
+          )
+        }
         <form
           className='flex flex-col items-center'
           onSubmit={handleSubmit(onSubmit)}

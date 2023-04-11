@@ -37,7 +37,7 @@ const login = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     if (!user)
       return res
-        .status(400)
+        .status(401)
         .json({ ok: false, message: 'Invalid credentials' });
 
     const { _id, name } = user as IUser;

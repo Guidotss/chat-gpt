@@ -5,7 +5,7 @@ interface IConfig {
 }
 
 const Config: IConfig = {
-  MongoURL: process.env.MONGO_URL || '',
+  MongoURL: process.env.MONGO_URL_LOCAL || '',
   MongoURL_Local: process.env.MONGO_URL_LOCAL || '',
   Options: {
     useNewUrlParser: true,
