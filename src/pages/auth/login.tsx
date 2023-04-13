@@ -25,6 +25,9 @@ const LoginPage = () => {
     }
     setShowErrorMessage(true);
     setErrorMessage('El usuario o la contraseña son incorrectos');
+    setTimeout(() => {
+      setShowErrorMessage(false);
+    },3000); 
     return; 
   }; 
 
