@@ -1,15 +1,29 @@
-import { useContext } from 'react';
+import { MouseEvent, useContext } from 'react';
 import { SunIcon, ThunderIcon, WarningIcon } from '../ui';
 import { UiContext } from '@/context/ui';
+import { ChatContext } from '@/context/chat';
 
 export const ChatDescription = () => {
 
-  const { theme } = useContext(UiContext)
+  const { theme } = useContext(UiContext); 
+  const { sendMessage } = useContext(ChatContext); 
+
+  const handelClickMessage = (event:MouseEvent<HTMLLIElement>) => {
+    const message = event.currentTarget.textContent!.split('→')[0].trim()
+    const messageObject = {
+      id:Math.random(),
+      message,
+      ia:false
+    }
+    sendMessage(messageObject); 
+  }
+
+
 
   return (
     <div className='flex flex-col items-center justify-center overflow-auto 2xl:h-[70vh] snap-always'>
       <div className={`flex ${theme === 'dark' ? 'text-gray-50' : 'text-gray-950'} text-4xl font-semibold mb-10`}>
-        <h1>ChatGPT</h1>
+        <h1>Clone-GPT</h1>
       </div>
       <div className='grid grid-cols-3 gap-3 items-center'>
         <div className='grid-col-1'>
@@ -21,15 +35,15 @@ export const ChatDescription = () => {
           </span>
           <div className='mt-3'>
             <ul className={`${theme === 'dark'? 'text-gray-50' : 'text-gray-950'} text-sm flex flex-col gap-2 w-64 text-center cursor-pointer`}>
-              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg `}>
+              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg `} onClick={handelClickMessage}>
                 "Explica la computacion cuantica en terminos simples" →
               </li>
-              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg`}>
+              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg`} onClick={handelClickMessage}>
                 "Dame algunas ideas creativas para un cumpleaños de 10 años" →
               </li>
-              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg `}>
+              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg `} onClick={handelClickMessage}>
                 "Como puedo hacer una peticion HTTP en Javascript " →
-              </li>
+              </li> 
             </ul>
           </div>
         </div>

@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { authReducer, AuthContext } from './';
 import { IUser } from '@/interfaces';
 import { updateImage } from '@/utils';
+import { signInWithGoogle } from '@/firebase';
 
 export interface AuthState {
   isLogged: boolean;
@@ -68,12 +69,11 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         Cookies.set('token', token);
         return true;
       }
-
     } catch (err) {
       console.log(err);
       Cookies.remove('token');
     }
-    return false; 
+    return false;
   };
 
   const logout = () => {
@@ -83,7 +83,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     });
   };
 
-  const updateUser = async (_id: string,name?: string,email?: string,avatar?: File,password?: string) => {
+  const updateUser = async (
+    _id: string,
+    name?: string,
+    email?: string,
+    avatar?: File,
+    password?: string
+  ) => {
     const token = Cookies.get('token');
     if (!token) {
       dispatch({
@@ -122,6 +128,23 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       });
     }
   };
+
+
+  const startSignInWithGoogle = async () => {
+    try{
+
+      const result = await signInWithGoogle(); 
+
+    }catch(err){
+
+      console.log(err); 
+      Cookies.remove('token');
+      dispatch({
+        type: '[AUTH] - Logout'
+      });
+    }
+  }
+
 
   useEffect(() => {
     revalidateToken();
@@ -167,6 +190,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     checkToken();
   }, []);
 
+
   const checkToken = async () => {
     try {
       const token = Cookies.get('token');
@@ -211,7 +235,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         login,
         register,
         logout,
-        updateUser
+        updateUser,
+        startSignInWithGoogle
       }}
     >
       {children}

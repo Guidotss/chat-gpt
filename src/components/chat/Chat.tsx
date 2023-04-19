@@ -39,7 +39,7 @@ export const Chat = () => {
               name='prompt'
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              className={`flex-1 p-2 rounded-lg ${theme === 'dark' ? 'bg-gptlightgray shadow-lg' : 'bg-slate-200 shadow-lg shadow-gray-400'} w-3/4 text-white resize-none`}
+              className={`flex-1 p-2 rounded-lg ${theme === 'dark' ? 'bg-gptlightgray shadow-lg' : 'bg-slate-200 shadow-lg shadow-gray-400 text-black'} w-3/4 text-white resize-none`}
             />
             <button
               className='absolute right-0 mt-[5px] hover:bg-gptdarkgray rounded-md p-1'

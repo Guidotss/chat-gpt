@@ -3,7 +3,7 @@ import { Config } from './';
 
 export const connect = async () => {
   try {
-    await mongoose.connect(Config.MongoURL, Config.Options);
+    await mongoose.connect(Config.MongoLocal,Config.Options);
     if (mongoose.connection.readyState === 1) {
       console.log('Connected to database');
     }
@@ -14,3 +14,6 @@ export const connect = async () => {
 };
 
 connect();
+
+
+

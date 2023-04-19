@@ -4,19 +4,22 @@ import { ChatContext } from '@/context/chat';
 import { Avatar, TypingEffect } from '../ui';
 import { GptIcon } from '../ui/GptIcon';
 import { AuthContext } from '@/context/auth';
+import { UiContext } from '@/context/ui';
 
 export const MessageList = () => {
   const { messages, loading } = useContext(ChatContext);
   const { user } = useContext(AuthContext);
+  const { theme } = useContext(UiContext);
 
   return (
     <div className='h-[70vh] overflow-auto sidebar-scroll-bar'>
       {messages.map((message) => (
         <div
           key={message.id}
-          className={`flex gap-4 p-8 w-3/4 m-auto ${
-            message.ia ? 'bg-gptlightgray' : 'bg-gptgray'
-          }`}
+          className={`flex gap-4 p-8 w-3/4 m-auto 
+            ${message.ia && theme == 'dark' && 'bg-gptlightgray'} 
+            ${message.ia && theme == 'light' && 'bg-slate-100 text-slate-900'}
+            ${!message.ia && theme == 'light' &&'bg-slate-50 text-slate-900 font-semibold'}`}
         >
           <Avatar>
             {message.ia ? (
@@ -40,7 +43,6 @@ export const MessageList = () => {
           </p>
         </div>
       ))}
-
       {loading && (
         <div className='flex gap-4 p-8 w-3/4 m-auto'>
           <Avatar>

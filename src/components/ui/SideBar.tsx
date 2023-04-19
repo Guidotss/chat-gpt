@@ -31,7 +31,7 @@ export const SideBar = () => {
   return (
     <aside className='bg-gptdarkgray fixed flex flex-col w-[260px] h-screen text-slate-200'>
       <div className='overflow-auto sidebar-scroll-bar flex flex-col'>
-        <div className='flex border-[1px] p-2 rounded-md w-[240px] self-center mt-5 shadow-sm shadow-gptlightgray'>
+        <div className='flex border-[1px] p-2 rounded-md w-[240px] self-center mt-7 shadow-sm shadow-gptlightgray '>
           <Image
             src='/plus.webp'
             alt='Picture of the author'
@@ -66,7 +66,7 @@ export const SideBar = () => {
         </div>
         <div className='divider mt-10' />
       </div>
-      <nav className='flex flex-col gap-5 ml-4 mt-10  mr-2'>
+      <nav className='flex flex-col gap-5 ml-4 mt-10 mr-2 absolute bottom-10 w-3/4'>
         <div className='flex hover:bg-gptlightgray p-3 rounded-lg '>
           <div
             className='flex items-center cursor-pointer'
