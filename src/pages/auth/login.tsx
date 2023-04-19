@@ -127,7 +127,7 @@ const LoginPage = () => {
         </form>
         <span className='flex justify-center mt-[10px]'>or</span>
         <div className='flex justify-center mt-[10px]'>
-          <button className='rounded-xl text-slate-200 px-10 flex justify-center items-center bg-gray-700 2xl:w-[15vw] p-2 hover:bg-gray-800' onClick={handleSingInWithGoogle}>
+          <button className='rounded-xl text-slate-200 px-5 flex justify-center items-center bg-gray-700 p-2 hover:bg-gray-800' onClick={handleSingInWithGoogle}>
             <GoogleIcon />
             <span className='ml-6'>Iniciar sesion con google</span>
           </button>
