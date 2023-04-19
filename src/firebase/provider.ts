@@ -1,11 +1,9 @@
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'; 
-import { firebaseAuth } from './config'; 
+import { firebaseAuth } from './config';
 
 
 
 const googleProvider = new GoogleAuthProvider(); 
-
-
 
 export const signInWithGoogle = async() => {
     
@@ -23,7 +21,7 @@ export const signInWithGoogle = async() => {
                 photoURL
             }
         }
-    }catch(err){
+    }catch(err:any){
         console.log(err); 
         return {
             ok: false,
