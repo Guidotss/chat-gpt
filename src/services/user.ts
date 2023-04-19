@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { User } from '@/models';
 export class UserService {
-  private user: typeof User;
+  private user:typeof User;
 
   constructor() {
     this.user = User;
