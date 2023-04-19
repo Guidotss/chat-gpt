@@ -16,9 +16,11 @@ export const MessageList = () => {
       {messages.map((message) => (
         <div
           key={message.id}
-          className={`flex gap-4 p-8 w-3/4 m-auto ${
-            (message.ia && theme == 'dark') ? 'bg-gptlightgray' : 'bg-gptgray'
-          }`}
+          className={`flex gap-4 p-8 w-3/4 m-auto 
+            ${(message.ia && theme == 'dark') &&'bg-gptlightgray'} 
+            ${message.ia && theme == 'light' && 'bg-slate-50 text-slate-900'}
+            ${!message.ia && theme == 'light' && 'bg-slate-50 text-slate-900 font-semibold'}`
+          }
         >
           <Avatar>
             {message.ia ? (
@@ -42,7 +44,6 @@ export const MessageList = () => {
           </p>
         </div>
       ))}
-
       {loading && (
         <div className='flex gap-4 p-8 w-3/4 m-auto'>
           <Avatar>
