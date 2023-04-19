@@ -9,7 +9,7 @@ import { UiContext } from '@/context/ui';
 export const MessageList = () => {
   const { messages, loading } = useContext(ChatContext);
   const { user } = useContext(AuthContext);
-  const { theme }  = useContext(UiContext);
+  const { theme } = useContext(UiContext);
 
   return (
     <div className='h-[70vh] overflow-auto sidebar-scroll-bar'>
@@ -17,10 +17,9 @@ export const MessageList = () => {
         <div
           key={message.id}
           className={`flex gap-4 p-8 w-3/4 m-auto 
-            ${(message.ia && theme == 'dark') &&'bg-gptlightgray'} 
-            ${message.ia && theme == 'light' && 'bg-slate-50 text-slate-900'}
-            ${!message.ia && theme == 'light' && 'bg-slate-50 text-slate-900 font-semibold'}`
-          }
+            ${message.ia && theme == 'dark' && 'bg-gptlightgray'} 
+            ${message.ia && theme == 'light' && 'bg-slate-100 text-slate-900'}
+            ${!message.ia && theme == 'light' &&'bg-slate-50 text-slate-900 font-semibold'}`}
         >
           <Avatar>
             {message.ia ? (

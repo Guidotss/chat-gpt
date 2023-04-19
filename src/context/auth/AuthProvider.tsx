@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { authReducer, AuthContext } from './';
 import { IUser } from '@/interfaces';
 import { updateImage } from '@/utils';
+import { signInWithGoogle } from '@/firebase';
 
 export interface AuthState {
   isLogged: boolean;
@@ -128,6 +129,23 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+
+  const startSignInWithGoogle = async () => {
+    try{
+
+      const result = await signInWithGoogle(); 
+
+    }catch(err){
+
+      console.log(err); 
+      Cookies.remove('token');
+      dispatch({
+        type: '[AUTH] - Logout'
+      });
+    }
+  }
+
+
   useEffect(() => {
     revalidateToken();
   }, []);
@@ -171,6 +189,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     checkToken();
   }, []);
+
 
   const checkToken = async () => {
     try {
@@ -216,7 +235,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         login,
         register,
         logout,
-        updateUser
+        updateUser,
+        startSignInWithGoogle
       }}
     >
       {children}

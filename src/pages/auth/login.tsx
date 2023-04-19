@@ -15,7 +15,7 @@ const LoginPage = () => {
   const { handleSubmit,register,formState: { errors } } = useForm<FormDataType>();
   const [ errorMessage, setErrorMessage ] = useState<string>();
   const [ showErrorMessage, setShowErrorMessage ] = useState<boolean>(false);
-  const { login } = useContext(AuthContext);
+  const { login,startSignInWithGoogle } = useContext(AuthContext);
   const router = useRouter();
 
   const handleLogin = async ({ email, password }: FormDataType) => {
@@ -30,6 +30,11 @@ const LoginPage = () => {
     },3000); 
     return; 
   }; 
+
+
+  const handleSingInWithGoogle = async () => {
+    await startSignInWithGoogle();
+  }
 
   return (
     <AuthLayOut
@@ -122,7 +127,7 @@ const LoginPage = () => {
         </form>
         <span className='flex justify-center mt-[10px]'>or</span>
         <div className='flex justify-center mt-[10px]'>
-          <button className='rounded-xl text-slate-200 px-10 flex justify-center items-center bg-gray-700 2xl:w-[15vw] p-2 hover:bg-gray-800'>
+          <button className='rounded-xl text-slate-200 px-10 flex justify-center items-center bg-gray-700 2xl:w-[15vw] p-2 hover:bg-gray-800' onClick={handleSingInWithGoogle}>
             <GoogleIcon />
             <span className='ml-6'>Iniciar sesion con google</span>
           </button>

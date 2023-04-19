@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { signDocument } from '@/jwt';
 import { UserService } from '@/services';
 import '@/database/connect';
-import { signDocument } from '@/jwt';
 
 type Data =
   | { ok: boolean; message: string }
