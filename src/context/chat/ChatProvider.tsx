@@ -46,6 +46,7 @@ export const ChatProvider: FC<ChatProviderProps> = ({ children }) => {
       payload: message
     });
   };
+  
   const sendIaMessage = async () => {
     startLoading();
 

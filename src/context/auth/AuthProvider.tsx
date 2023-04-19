@@ -68,12 +68,11 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         Cookies.set('token', token);
         return true;
       }
-
     } catch (err) {
       console.log(err);
       Cookies.remove('token');
     }
-    return false; 
+    return false;
   };
 
   const logout = () => {
@@ -83,7 +82,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     });
   };
 
-  const updateUser = async (_id: string,name?: string,email?: string,avatar?: File,password?: string) => {
+  const updateUser = async (
+    _id: string,
+    name?: string,
+    email?: string,
+    avatar?: File,
+    password?: string
+  ) => {
     const token = Cookies.get('token');
     if (!token) {
       dispatch({
