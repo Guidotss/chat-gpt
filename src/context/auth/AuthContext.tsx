@@ -9,7 +9,7 @@ interface AuthContextProps {
   register: (user: IUser) => Promise<boolean>;
   logout: () => void;
   updateUser: (id:string,name?:string, email?:string,avatar?:File,password?:string) => Promise<void>;
-  startSignInWithGoogle: () => Promise<void>;
+  startSignInWithGoogle: () => Promise<boolean>;
 }
 
 export const AuthContext = createContext({} as AuthContextProps);

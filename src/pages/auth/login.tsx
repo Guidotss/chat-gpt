@@ -33,7 +33,18 @@ const LoginPage = () => {
 
 
   const handleSingInWithGoogle = async () => {
-    await startSignInWithGoogle();
+    const ok = await startSignInWithGoogle();
+    console.log(ok); 
+    if(ok){
+      router.push('/');
+    }else{
+      setShowErrorMessage(true);
+      setErrorMessage('No se pudo iniciar sesión con Google');
+      setTimeout(() => {
+        setShowErrorMessage(false);
+      },3000);
+      return; 
+    }
   }
 
   return (

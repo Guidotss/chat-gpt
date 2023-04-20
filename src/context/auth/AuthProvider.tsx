@@ -132,8 +132,31 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const startSignInWithGoogle = async () => {
     try{
-
+      let user; 
       const result = await signInWithGoogle(); 
+
+      if(result.ok){
+        user = result.user; 
+        const response = await fetch('/api/auth/google', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(user)
+        }); 
+        const data = await response.json(); 
+        if(data.ok){
+          const { user, token } = data; 
+          dispatch({
+            type: '[AUTH] - Login',
+            payload: user
+          });
+          Cookies.set('token', token);
+          return true; 
+        }
+        return false; 
+      }
+      return false; 
 
     }catch(err){
 
@@ -142,6 +165,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       dispatch({
         type: '[AUTH] - Logout'
       });
+      return false;
     }
   }
 
