@@ -52,8 +52,8 @@ const LoginPage = () => {
       title='Login'
       description='El usuatio debe iniciar sesión para poder continuar'
     >
-      <div className='shadow-lg shadow-gray-900 rounded-lg w-[40vw] h-[95vh] 2xl:h-3/4'>
-        <h1 className='text-4xl text-gray-50 mb-10 text-center mt-[15vh]'>
+      <div className='sm:shadow-lg sm:shadow-gray-950 rounded-lg w-[350px] h-3/4 2xl:h-3/4 2xl:w-[30vw]'>
+        <h1 className='text-4xl text-gray-50 mb-10 text-center mt-10 2xl:mt-[15vh]'>
           Iniciar Sesión
         </h1>
         {
@@ -130,15 +130,15 @@ const LoginPage = () => {
             )}
           </div>
           <button
-            className='bg-gptlogo hover:bg-green-700 text-white font-bold py-2 px-3 rounded-full focus:outline-none focus:shadow-outline w-1/4 mt-2'
+            className='bg-gptlogo sm:hover:bg-green-700 text-white font-bold sm:py-2 sm:px-3 rounded-full focus:outline-none focus:shadow-outline sm:w-1/4 mt-2 w-1/2 h-12'
             type='submit'
           >
             Iniciar sesion
           </button>
         </form>
-        <span className='flex justify-center mt-[10px]'>or</span>
+        <span className='flex justify-center mt-[10px] text-slate-200'>or</span>
         <div className='flex justify-center mt-[10px]'>
-          <button className='rounded-xl text-slate-200 px-5 flex justify-center items-center bg-gray-700 p-2 hover:bg-gray-800' onClick={handleSingInWithGoogle}>
+          <button className='rounded-xl text-slate-200 sm:px-5 flex justify-center items-center bg-gray-700 p-2 sm:hover:bg-gray-800' onClick={handleSingInWithGoogle}>
             <GoogleIcon />
             <span className='ml-6'>Iniciar sesion con google</span>
           </button>
