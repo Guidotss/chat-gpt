@@ -24,12 +24,12 @@ export const Chat = () => {
   };
 
   return (
-    <div className='flex flex-col h-full flex-1 pl-64 mt-10 text-white font-extralight overflow-auto'>
+    <div className='flex flex-col h-full flex-1 sm:pl-64 mt-5 sm:mt-10 text-white font-extralight overflow-auto'>
       {messages.length > 0 ? <MessageList /> : <ChatDescription />}
-      <div className='absolute bottom-0 self-center w-1/3'>
-        <div>
+      <div className='fixed sm:absolute bottom-0 self-center sm:w-1/3 w-full bg-gptgray border-t-[1px] sm:border-t-0'>
+        <div className='sm:mt-5 mt-2'>
           <form
-            className='stretch mx-2 flex flex-row gap-3 last:mb-2 w-full'
+            className='stretch mx-2 flex flex-row gap-3 last:mb-2 sm:w-full'
             onSubmit={(e) => onSubmitMessage(e)}
             onKeyDown={(e) => e.key == 'Enter' && onSubmitMessage(e)}
           >
@@ -39,16 +39,16 @@ export const Chat = () => {
               name='prompt'
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              className={`flex-1 p-2 rounded-lg ${theme === 'dark' ? 'bg-gptlightgray shadow-lg' : 'bg-slate-200 shadow-lg shadow-gray-400 text-slate-900'} w-3/4 focus:outline-none`}
+              className={`flex-1 p-2 rounded-lg ${theme === 'dark' ? 'bg-gptlightgray shadow-lg' : 'bg-slate-200 shadow-lg shadow-gray-400 text-slate-900'} w-3/4 focus:outline-none sm:mb-1`}
             />
             <button
-              className='absolute right-0 mt-[5px] hover:bg-gptdarkgray rounded-md p-1'
+              className='absolute sm:right-0 right-3 mt-[5px] hover:bg-gptdarkgray rounded-md p-1'
               type='submit'
             >
               <Image src='/send.webp' alt='send' width={20} height={20} />
             </button>
           </form>
-          <div className='flex flex-row gap-3 w-full text-gray-400 p-5 justify-center'>
+          <div className='flex flex-row gap-3 w-full text-gray-400 sm:p-5 justify-center'>
             <Link
               href='https://help.openai.com/en/articles/6825453-chatgpt-release-notes'
               passHref

@@ -27,8 +27,10 @@ export const ChatLayOut: FC<ChatLayOutProps> = ({ title,description,image,childr
         {image && <meta name='og:image' content={image} />}
       </Head>
 
-      <main className={`w-full h-screen relative ${theme === 'dark' ? 'bg-gptgray' : 'bg-gray-50'}`}>
-        <SideBar />
+      <main className={`w-full sm:h-screen relative ${theme === 'dark' ? 'bg-gptgray' : 'bg-gray-50'}`}>
+        <aside className='hidden sm:block'>
+          <SideBar />
+        </aside>
         {children}
       </main>
     </>

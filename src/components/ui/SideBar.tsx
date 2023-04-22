@@ -29,7 +29,7 @@ export const SideBar = () => {
   };
 
   return (
-    <aside className='bg-gptdarkgray fixed flex flex-col w-[260px] h-screen text-slate-200'>
+    <div className='bg-gptdarkgray fixed sm:flex sm:flex-col w-[260px] h-screen text-slate-200'>
       <div className='overflow-auto sidebar-scroll-bar flex flex-col'>
         <div className='flex border-[1px] p-2 rounded-md w-[240px] self-center mt-7 shadow-sm shadow-gptlightgray '>
           <Image
@@ -157,6 +157,6 @@ export const SideBar = () => {
           </div>
         </div>
       </nav>
-    </aside>
+    </div>
   );
 };

@@ -22,11 +22,11 @@ export const ChatDescription = () => {
 
   return (
     <div className='flex flex-col items-center justify-center overflow-auto 2xl:h-[70vh] snap-always'>
-      <div className={`flex ${theme === 'dark' ? 'text-gray-50' : 'text-gray-950'} text-4xl font-semibold mb-10`}>
+      <div className={`flex ${theme === 'dark' ? 'text-gray-50' : 'text-gray-950'} text-4xl font-semibold sm:mb-10 mb-5`}>
         <h1>Clone-GPT</h1>
       </div>
-      <div className='grid grid-cols-3 gap-3 items-center'>
-        <div className='grid-col-1'>
+      <div className='grid sm:grid-cols-3 gap-3 items-center'>
+        <div className='sm:grid-col-1'>
           <div className='flex justify-center'>
             <SunIcon />
           </div>

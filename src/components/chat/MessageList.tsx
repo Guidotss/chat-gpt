@@ -12,7 +12,7 @@ export const MessageList = () => {
   const { theme } = useContext(UiContext);
 
   return (
-    <div className='h-[70vh] overflow-auto sidebar-scroll-bar'>
+    <div className='h-[500px] sm:h-[70vh] overflow-auto sidebar-scroll-bar'>
       {messages.map((message) => (
         <div
           key={message.id}
