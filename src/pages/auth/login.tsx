@@ -52,7 +52,7 @@ const LoginPage = () => {
       title='Login'
       description='El usuatio debe iniciar sesión para poder continuar'
     >
-      <div className='sm:shadow-lg sm:shadow-gray-950 rounded-lg w-[350px] h-3/4 2xl:h-3/4 2xl:w-[30vw]'>
+      <div className='sm:shadow-lg sm:shadow-gray-950 rounded-lg w-[350px] h-3/4 2xl:h-3/4 md:w-[30vw] md:h-[500px]'>
         <h1 className='text-4xl text-gray-50 mb-10 text-center mt-10 2xl:mt-[15vh]'>
           Iniciar Sesión
         </h1>
@@ -130,7 +130,7 @@ const LoginPage = () => {
             )}
           </div>
           <button
-            className='bg-gptlogo sm:hover:bg-green-700 text-white font-bold sm:py-2 sm:px-3 rounded-full focus:outline-none focus:shadow-outline sm:w-1/4 mt-2 w-1/2 h-12'
+            className='bg-gptlogo sm:hover:bg-green-700 text-white font-bold sm:py-2 sm:px-3 rounded-full focus:outline-none focus:shadow-outline sm:w-1/2 mt-2 w-1/2 h-12'
             type='submit'
           >
             Iniciar sesion

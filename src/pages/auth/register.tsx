@@ -39,7 +39,7 @@ const RegisterPage = () => {
       title='Registrarse'
       description='El usuario debe registrarse para continuar'
     >
-      <div className='shadow-lg shadow-gray-900 rounded-lg w-[40vw] h-[95vh] 2xl:h-3/4'>
+      <div className='sm:shadow-lg sm:shadow-gray-900 rounded-lg md:w-[30vw] md:h-[500pxvh] 2xl:h-3/4'>
         <h1 className='text-4xl text-gray-50 mb-10 text-center mt-[15vh]'>
           Registrarse
         </h1>
@@ -135,7 +135,7 @@ const RegisterPage = () => {
             )}
           </div>
           <button
-            className='bg-gptlogo hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline w-1/4'
+            className='bg-gptlogo hover:bg-green-700 text-white font-bold sm:py-2 sm:px-2 rounded-full focus:outline-none focus:shadow-outline sm:w-1/2 w-1/2 h-12'
             type='submit'
           >
             Registrarse
@@ -146,7 +146,7 @@ const RegisterPage = () => {
           passHref
           legacyBehavior
         >
-          <a className='flex justify-end mr-10 text-gray-50 underline mt-5'>¿Ya tienes cuenta?</a>
+          <a className='flex justify-end mr-10 text-gray-50 underline mt-5 mb-10'>¿Ya tienes cuenta?</a>
         </Link>
       </div>
     </AuthLayOut>
