@@ -2,6 +2,7 @@ import { FC, useContext } from 'react';
 import Head from 'next/head';
 import { SideBar } from '../index';
 import { UiContext } from '@/context/ui';
+import { MenuIcon } from '../ui/MenuIcon';
 
 interface ChatLayOutProps {
   children: React.ReactNode;
@@ -28,6 +29,11 @@ export const ChatLayOut: FC<ChatLayOutProps> = ({ title,description,image,childr
       </Head>
 
       <main className={`w-full sm:h-screen relative ${theme === 'dark' ? 'bg-gptgray' : 'bg-gray-50'}`}>
+        <div className='sm:hidden block absolute left-2 top-2'>
+          <button aria-label='Menu'>
+            <MenuIcon/>
+          </button>
+        </div>
         <aside className='hidden sm:block'>
           <SideBar />
         </aside>
