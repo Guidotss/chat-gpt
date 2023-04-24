@@ -7,7 +7,7 @@ export const MenuIcon = () => {
       viewBox='0 0 24 24'
       strokeLinecap='round'
       strokeLinejoin='round'
-      className='h-6 w-6'
+      className='h-10 w-10'
       height='1em'
       width='1em'
       xmlns='http://www.w3.org/2000/svg'
