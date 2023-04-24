@@ -1,7 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { UserService } from '@/services';
 import { verifyToken, signDocument } from '@/jwt';
+import { UserId } from '@/interfaces';
 import '@/database/connect';
+
 
 type Data =
   | { message: string }
@@ -18,13 +20,24 @@ export default function (req: NextApiRequest, res: NextApiResponse<Data>) {
 
 const validateToken = async (req: NextApiRequest,res: NextApiResponse<Data>) => {
   const { token = '' } = req.cookies;
-  let userId = '';
+  let userId:UserId;
 
   try {
     const userService = new UserService();
-    userId = await verifyToken(token);
+    userId = await verifyToken(token); 
 
-    const user = await userService.getUserById(userId);
+    if(userId.providerId === 'firebase'){
+      const newToken = signDocument(userId._id, userId.email,userId.providerId,userId.displayName,userId.photoURL);
+      return res
+        .status(200)
+        .json({
+          ok: true,
+          token: newToken,
+          user: { name: userId.displayName, email: userId.email, avatar:userId.photoURL, _id:userId._id! }
+        }); 
+    }
+  
+    const user = await userService.getUserById(userId._id);
     if (!user) return res.status(401).json({ message: 'Unauthorized' });
 
     const newToken = signDocument(user._id, user.email);

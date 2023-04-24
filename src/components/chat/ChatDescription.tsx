@@ -8,7 +8,7 @@ export const ChatDescription = () => {
   const { theme } = useContext(UiContext); 
   const { sendMessage } = useContext(ChatContext); 
 
-  const handelClickMessage = (event:MouseEvent<HTMLLIElement>) => {
+  const handleClickMessage = (event:MouseEvent<HTMLLIElement>) => {
     const message = event.currentTarget.textContent!.split('→')[0].trim()
     const messageObject = {
       id:Math.random(),
@@ -35,13 +35,13 @@ export const ChatDescription = () => {
           </span>
           <div className='mt-3'>
             <ul className={`${theme === 'dark'? 'text-gray-50' : 'text-gray-950'} text-sm flex flex-col gap-2 w-64 text-center cursor-pointer`}>
-              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg `} onClick={handelClickMessage}>
+              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg `} onClick={handleClickMessage}>
                 "Explica la computacion cuantica en terminos simples" →
               </li>
-              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg`} onClick={handelClickMessage}>
+              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg`} onClick={handleClickMessage}>
                 "Dame algunas ideas creativas para un cumpleaños de 10 años" →
               </li>
-              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg `} onClick={handelClickMessage}>
+              <li className={`${ theme === 'dark' ? 'bg-gptlightgray hover:bg-gptdarkgray' : 'bg-gray-200 hover:bg-gray-300' } p-2 rounded-lg `} onClick={handleClickMessage}>
                 "Como puedo hacer una peticion HTTP en Javascript " →
               </li> 
             </ul>

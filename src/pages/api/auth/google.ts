@@ -26,7 +26,7 @@ const loginWithGoogle = async (req: NextApiRequest,res: NextApiResponse<Data>) =
       .json({ ok: false, message: 'Missing required fields' });
   }
 
-  const token = signDocument(uid, email);
+  const token = signDocument(uid, email, providerId, displayName, photoURL);
   return res.status(200).json({
     ok: true,
     user: {
