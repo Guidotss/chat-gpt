@@ -42,10 +42,17 @@ export const UiProvider: FC<UiProviderProps> = ({ children }) => {
     });
   };
 
-  const toggleSidebar = () => {
+  const openSidebar = () => {
     dispatch({
-      type: '[UI] - Toggle Sidebar',
-      payload: !state.sidebar
+      type: '[UI] - Open Sidebar',
+      payload: true
+    });
+  }
+
+  const closeSidebar = () => {
+    dispatch({
+      type: '[UI] - Open Sidebar',
+      payload:false
     });
   }
 
@@ -55,7 +62,8 @@ export const UiProvider: FC<UiProviderProps> = ({ children }) => {
         ...state,
 
         toggleTheme,
-        toggleSidebar
+        openSidebar,
+        closeSidebar
       }}
     >
       {children}

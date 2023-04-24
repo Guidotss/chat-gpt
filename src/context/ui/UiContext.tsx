@@ -5,7 +5,8 @@ interface UiContextProps {
     sidebar: boolean;
 
     toggleTheme: () => void;
-    toggleSidebar: () => void;
+    openSidebar: () => void;
+    closeSidebar: () => void;
 }
 
 

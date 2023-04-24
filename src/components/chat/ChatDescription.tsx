@@ -5,14 +5,14 @@ import { ChatContext } from '@/context/chat';
 
 export const ChatDescription = () => {
 
-  const { theme,sidebar,toggleSidebar } = useContext(UiContext); 
+  const { theme,sidebar,closeSidebar } = useContext(UiContext); 
   const { sendMessage } = useContext(ChatContext); 
 
   const handleClickMessage = (event:MouseEvent<HTMLLIElement>) => {
     
     if(sidebar){
       event.stopPropagation();
-      toggleSidebar();
+      closeSidebar();
       return; 
     }
 

@@ -3,7 +3,8 @@ import { UiState } from './'
 
 type UiActionType = 
     | { type:'[UI] - Toggle Theme', payload: string }
-    | { type:'[UI] - Toggle Sidebar', payload:  boolean }
+    | { type:'[UI] - Open Sidebar', payload: boolean}
+    | { type:'[UI] - Close Sidebar', payload: boolean}
 
 
 export const uiReducer = (state: UiState, action: UiActionType): UiState => {
@@ -14,11 +15,18 @@ export const uiReducer = (state: UiState, action: UiActionType): UiState => {
                 theme: action.payload
             }
         
-        case '[UI] - Toggle Sidebar':
+        case '[UI] - Open Sidebar':
             return {
                 ...state,
                 sidebar: action.payload
             }
+        
+        case '[UI] - Close Sidebar':
+            return {
+                ...state,
+                sidebar: action.payload
+            }
+
         default:
             return state; 
     }
