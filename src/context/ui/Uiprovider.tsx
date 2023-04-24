@@ -8,10 +8,12 @@ interface UiProviderProps {
 
 export interface UiState {
   theme: string;
+  sidebar: boolean;
 }
 
 const UI_INITIAL_STATE: UiState = {
-  theme: 'dark'
+  theme: 'dark',
+  sidebar: false
 };
 
 export const UiProvider: FC<UiProviderProps> = ({ children }) => {
@@ -40,12 +42,20 @@ export const UiProvider: FC<UiProviderProps> = ({ children }) => {
     });
   };
 
+  const toggleSidebar = () => {
+    dispatch({
+      type: '[UI] - Toggle Sidebar',
+      payload: !state.sidebar
+    });
+  }
+
   return (
     <UiContext.Provider
       value={{
         ...state,
 
-        toggleTheme
+        toggleTheme,
+        toggleSidebar
       }}
     >
       {children}

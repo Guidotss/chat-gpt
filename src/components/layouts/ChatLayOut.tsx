@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, MouseEvent, useContext } from 'react';
 import Head from 'next/head';
 import { SideBar } from '../index';
 import { UiContext } from '@/context/ui';
@@ -13,7 +13,13 @@ interface ChatLayOutProps {
 
 export const ChatLayOut: FC<ChatLayOutProps> = ({ title,description,image,children }) => {
 
-  const { theme } = useContext(UiContext);
+  const { theme,sidebar,toggleSidebar } = useContext(UiContext); 
+
+  const onToggleSidebar = (e:MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    toggleSidebar();
+  }
 
   return (
     <>
@@ -30,14 +36,16 @@ export const ChatLayOut: FC<ChatLayOutProps> = ({ title,description,image,childr
 
       <main className={`w-full sm:h-screen relative ${theme === 'dark' ? 'bg-gptgray' : 'bg-gray-50'}`}>
         <div className='sm:hidden block absolute left-2 top-2'>
-          <button aria-label='Menu'>
+          <button aria-label='Menu' onClick={onToggleSidebar}>
             <MenuIcon/>
           </button>
         </div>
-        <aside className='hidden sm:block'>
+        <aside className={`${sidebar ? 'block' : 'hidden'} sm:block absolute z-10`}>
           <SideBar />
         </aside>
-        {children}
+        <div onClick={onToggleSidebar} className={`${sidebar ? 'blur-sm' : ''}`}>
+          {children}
+        </div>
       </main>
     </>
   );

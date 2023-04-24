@@ -2,8 +2,10 @@ import { FC, createContext } from 'react';
 
 interface UiContextProps {
     theme: string;
+    sidebar: boolean;
 
     toggleTheme: () => void;
+    toggleSidebar: () => void;
 }
 
 

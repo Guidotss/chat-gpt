@@ -5,10 +5,17 @@ import { ChatContext } from '@/context/chat';
 
 export const ChatDescription = () => {
 
-  const { theme } = useContext(UiContext); 
+  const { theme,sidebar,toggleSidebar } = useContext(UiContext); 
   const { sendMessage } = useContext(ChatContext); 
 
   const handleClickMessage = (event:MouseEvent<HTMLLIElement>) => {
+    
+    if(sidebar){
+      event.stopPropagation();
+      toggleSidebar();
+      return; 
+    }
+
     const message = event.currentTarget.textContent!.split('→')[0].trim()
     const messageObject = {
       id:Math.random(),
