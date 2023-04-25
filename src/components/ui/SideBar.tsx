@@ -36,7 +36,9 @@ export const SideBar = () => {
             src='/plus.webp'
             alt='Picture of the author'
             width={30}
-            height={10}
+            height={30}
+            loading='lazy'
+            
           />
           <div className='ml-5 self-center'>
             <span>Nuevo Chat</span>
@@ -54,6 +56,7 @@ export const SideBar = () => {
                       alt='chat.webp'
                       width={20}
                       height={10}
+                      loading='lazy'
                     />
                     <div className='ml-5 self-center'>
                       <TypingEffect text={item.message} />
@@ -76,7 +79,8 @@ export const SideBar = () => {
               src='/delete.webp'
               alt='delete.webp'
               width={20}
-              height={10}
+              height={20}
+              loading='lazy'
             />
             <div className='ml-5 self-center'>
               <span>Eliminar Chat</span>
@@ -94,7 +98,8 @@ export const SideBar = () => {
                   src='/darkmode.webp'
                   alt='darkmode.webp'
                   width={20}
-                  height={10}
+                  height={20}
+                  loading='lazy'
                 />
                 <div className='ml-5 self-center'>
                   <span>Modo Oscuro</span>
@@ -149,7 +154,8 @@ export const SideBar = () => {
               src='/logout.webp'
               alt='logout.webp'
               width={20}
-              height={10}
+              height={20}
+              loading='lazy'
             />
             <div className='ml-5 self-center cursor-pointer'>
               <span>Cerrar Sesión</span>

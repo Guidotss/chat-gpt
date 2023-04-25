@@ -12,10 +12,15 @@ type FormDataType = {
 };
 
 const LoginPage = () => {
-  const { handleSubmit,register,formState: { errors } } = useForm<FormDataType>();
-  const [ errorMessage, setErrorMessage ] = useState<string>();
-  const [ showErrorMessage, setShowErrorMessage ] = useState<boolean>(false);
-  const { login,startSignInWithGoogle } = useContext(AuthContext);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors }
+  } = useForm<FormDataType>();
+  
+  const [errorMessage, setErrorMessage] = useState<string>();
+  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
+  const { login, startSignInWithGoogle } = useContext(AuthContext);
   const router = useRouter();
 
   const handleLogin = async ({ email, password }: FormDataType) => {
@@ -27,25 +32,24 @@ const LoginPage = () => {
     setErrorMessage('El usuario o la contraseña son incorrectos');
     setTimeout(() => {
       setShowErrorMessage(false);
-    },3000); 
-    return; 
-  }; 
-
+    }, 3000);
+    return;
+  };
 
   const handleSingInWithGoogle = async () => {
     const ok = await startSignInWithGoogle();
-    console.log(ok); 
-    if(ok){
+
+    if (ok) {
       router.push('/');
-    }else{
+    } else {
       setShowErrorMessage(true);
       setErrorMessage('No se pudo iniciar sesión con Google');
       setTimeout(() => {
         setShowErrorMessage(false);
-      },3000);
-      return; 
+      }, 3000);
+      return;
     }
-  }
+  };
 
   return (
     <AuthLayOut
@@ -56,15 +60,13 @@ const LoginPage = () => {
         <h1 className='text-4xl text-gray-50 mb-10 text-center mt-10 2xl:mt-[15vh]'>
           Iniciar Sesión
         </h1>
-        {
-          showErrorMessage && (
-            <div className='flex justify-center'>
-              <span className='text-red-500 text-xs italic mb-5'>
-                {errorMessage}
-              </span>
-            </div>
-          )
-        }
+        {showErrorMessage && (
+          <div className='flex justify-center'>
+            <span className='text-red-500 text-xs italic mb-5'>
+              {errorMessage}
+            </span>
+          </div>
+        )}
 
         <form
           className='flex flex-col items-center justify-center'
@@ -138,7 +140,10 @@ const LoginPage = () => {
         </form>
         <span className='flex justify-center mt-[10px] text-slate-200'>or</span>
         <div className='flex justify-center mt-[10px]'>
-          <button className='rounded-xl text-slate-200 sm:px-5 flex justify-center items-center bg-gray-700 p-2 sm:hover:bg-gray-800' onClick={handleSingInWithGoogle}>
+          <button
+            className='rounded-xl text-slate-200 sm:px-5 flex justify-center items-center bg-gray-700 p-2 sm:hover:bg-gray-800'
+            onClick={handleSingInWithGoogle}
+          >
             <GoogleIcon />
             <span className='ml-6'>Iniciar sesion con google</span>
           </button>
