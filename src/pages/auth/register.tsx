@@ -38,6 +38,7 @@ const RegisterPage = () => {
     <AuthLayOut
       title='Registrarse'
       description='El usuario debe registrarse para continuar'
+      fullUrlImage='https://res.cloudinary.com/dqsqafh2n/image/upload/v1682522852/chatGPT-users/Screenshot_2023-04-26_122225_nlp7p5.png'
     >
       <div className='sm:shadow-lg sm:shadow-gray-900 rounded-lg md:w-[30vw] md:h-[500pxvh] 2xl:h-3/4'>
         <h1 className='text-4xl text-gray-50 mb-10 text-center mt-[15vh]'>

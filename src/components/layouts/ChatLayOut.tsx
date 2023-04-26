@@ -4,14 +4,15 @@ import { SideBar } from '../index';
 import { UiContext } from '@/context/ui';
 import { MenuIcon } from '../ui/MenuIcon';
 
+
 interface ChatLayOutProps {
   children: React.ReactNode;
   title?: string;
   description?: string;
-  image?: string;
+  fullUrlImage?: string;
 }
 
-export const ChatLayOut: FC<ChatLayOutProps> = ({ title,description,image,children }) => {
+export const ChatLayOut: FC<ChatLayOutProps> = ({ title,description,fullUrlImage,children }) => {
   const { theme, sidebar, openSidebar, closeSidebar } = useContext(UiContext);
 
   const onOpenSidebar = (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => {
@@ -33,7 +34,7 @@ export const ChatLayOut: FC<ChatLayOutProps> = ({ title,description,image,childr
         <meta name='description' content={description || 'Chat App'} />
         <meta name='og:title' content={title || 'Chat App'} />
         <meta name='og:description' content={description || 'Chat App'} />
-        {image && <meta name='og:image' content={image} />}
+        {fullUrlImage && <meta name='og:image' content={fullUrlImage} />}
       </Head>
 
       <main

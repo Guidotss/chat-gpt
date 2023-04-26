@@ -55,6 +55,7 @@ const LoginPage = () => {
     <AuthLayOut
       title='Login'
       description='El usuatio debe iniciar sesión para poder continuar'
+      fullUrlImage='https://res.cloudinary.com/dqsqafh2n/image/upload/v1682522814/chatGPT-users/Screenshot_2023-04-26_122307_pjmxqi.png'
     >
       <div className='sm:shadow-lg sm:shadow-gray-950 rounded-lg w-[350px] h-3/4 2xl:h-3/4 md:w-[30vw] md:h-[500px]'>
         <h1 className='text-4xl text-gray-50 mb-10 text-center mt-10 2xl:mt-[15vh]'>
