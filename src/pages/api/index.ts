@@ -41,6 +41,8 @@ const GetIAinfo = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     });
 
     const data: IaResponse = await response.json();
+
+
     return res.status(200).json({ data: data.choices[0] });
     
   } catch (err) {
