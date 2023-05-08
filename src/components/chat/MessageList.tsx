@@ -9,14 +9,14 @@ import { UiContext } from '@/context/ui';
 export const MessageList = () => {
 
   const { messages, loading } = useContext(ChatContext);
-  const bottomRef = useRef(null)
+  const bottomRef = useRef<null | HTMLDivElement>(null)
 
   const { user } = useContext(AuthContext);
   const { theme } = useContext(UiContext);
 
 
   useEffect(() => {
-    bottomRef.current.scrollIntoView({ behavior: 'smooth' })
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages]); 
 
   return (
