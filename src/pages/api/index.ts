@@ -42,7 +42,12 @@ const GetIAinfo = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     });
 
     const data: IaResponse = await response.json();
+<<<<<<< HEAD
     console.log(data);
+=======
+
+
+>>>>>>> 05c09a17179f3375398bfb3b8d51346439ca5a4b
     return res.status(200).json({ data: data.choices[0] });
     
   } catch (err) {

@@ -26,7 +26,7 @@ export const Chat = () => {
   return (
     <div className='flex flex-col h-full flex-1 sm:pl-64 mt-5 sm:mt-10 text-white font-extralight overflow-auto'>
       {messages.length > 0 ? <MessageList /> : <ChatDescription />}
-      <div className='fixed sm:absolute bottom-0 self-center sm:w-1/3 w-full bg-gptgray border-t-[1px] sm:border-t-0'>
+      <div className={`fixed sm:absolute bottom-0 self-center sm:w-1/3 w-full ${theme === 'dark' ? 'bg-gptgray' : 'bg-slate-50'} border-t-[1px] sm:border-t-0`}>
         <div className='sm:mt-5 mt-2'>
           <form
             className='stretch mx-2 flex flex-row gap-3 last:mb-2 sm:w-full'
@@ -48,7 +48,7 @@ export const Chat = () => {
               <Image src='/send.webp' alt='send' width={20} height={20} />
             </button>
           </form>
-          <div className='flex flex-row gap-3 w-full text-gray-400 sm:p-5 justify-center'>
+          <div className={`flex flex-row gap-3 w-full text-gray-400 sm:p-5 justify-center`}>
             <Link
               href='https://help.openai.com/en/articles/6825453-chatgpt-release-notes'
               passHref
