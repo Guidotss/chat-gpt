@@ -18,6 +18,7 @@ export default function handler(
 const GetIAinfo = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   const { prompt } = req.body;
 
+
   try {
     
     if (!prompt) {
@@ -41,6 +42,7 @@ const GetIAinfo = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     });
 
     const data: IaResponse = await response.json();
+    console.log(data);
     return res.status(200).json({ data: data.choices[0] });
     
   } catch (err) {

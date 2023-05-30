@@ -10,7 +10,7 @@ export const TypingEffect: FC<TypingEffectProps> = ({ text }) => {
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
-    if (!text.length) return;
+    if (!text?.length) return;
 
     const randomTime = Math.floor(Math.random() * 100) + 15;
 

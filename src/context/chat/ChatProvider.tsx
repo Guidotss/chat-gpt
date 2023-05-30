@@ -41,6 +41,7 @@ export const ChatProvider: FC<ChatProviderProps> = ({ children }) => {
   };
 
   const sendMessage = (message: Messages) => {
+    
     dispatch({
       type: '[CHAT] - Send Message',
       payload: message
@@ -49,8 +50,11 @@ export const ChatProvider: FC<ChatProviderProps> = ({ children }) => {
   
   const sendIaMessage = async () => {
     startLoading();
-
-    if (!lastMessage) return;
+    
+    if(!lastMessage){
+      stopLoading();
+      return;
+    }; 
 
     const response = await fetch('/api', {
       method: 'POST',
