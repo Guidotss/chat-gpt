@@ -32,6 +32,7 @@
     "@types/bcrypt": "^5.0.0",
     "@types/react-scroll-to-bottom": "^4.2.0",
     "autoprefixer": "^10.4.14",
+    "jsdoc": "^4.0.2",
     "postcss": "^8.4.21",
     "prettier": "^2.8.7",
     "standard": "^17.0.0",

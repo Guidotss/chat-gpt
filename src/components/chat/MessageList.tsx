@@ -6,6 +6,11 @@ import { GptIcon } from '../ui/GptIcon';
 import { AuthContext } from '@/context/auth';
 import { UiContext } from '@/context/ui';
 
+
+/* 
+  Componente que se encarga de renderizar la lista de mensajes
+  @returns {JSX.Element} - Retorna la lista de mensajes
+*/
 export const MessageList = () => {
 
   const { messages, loading } = useContext(ChatContext);
@@ -14,7 +19,9 @@ export const MessageList = () => {
   const { user } = useContext(AuthContext);
   const { theme } = useContext(UiContext);
 
-
+  /* 
+    Hook que se encarga de hacer scroll automatico hacia el ultimo mensaje
+  */
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages]); 
@@ -42,13 +49,13 @@ export const MessageList = () => {
                 />
               )}
             </Avatar>
-            <p className='self-center'>
+            <div className='self-center'>
               {message.ia ? (
                 <TypingEffect text={message.message} />
               ) : (
                 message.message
               )}
-            </p>
+            </div>
           </div>
         ))}
         {loading && (

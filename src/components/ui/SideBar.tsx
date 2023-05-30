@@ -5,25 +5,41 @@ import { ChatContext } from '@/context/chat';
 import { TypingEffect } from './TypingEffect';
 import { AuthContext } from '@/context/auth';
 import { UiContext } from '@/context/ui';
-import { SunIcon } from './SunIcon';
 import { SettingIcon } from './SettingIcon';
 import Link from 'next/link';
 
+
+/* 
+  Componente que se encarga de renderizar el sidebar
+  @returns {JSX.Element} - Retorna el sidebar
+*/
 export const SideBar = () => {
   const { messages, deleteChat } = useContext(ChatContext);
   const { logout } = useContext(AuthContext);
   const { toggleTheme, theme } = useContext(UiContext);
   const router = useRouter();
 
+  /* 
+    Funcion que se encarga de controlar el evento click del boton de eliminar chat e invoca la funcion deleteChat del contexto
+    @returns {void} - No retorna ningun valor
+  */
   const handleDeleteChat = () => {
     deleteChat();
   };
 
+  /* 
+    Funcion que se encarga de controlar el evento click del boton de cerrar sesion e invoca la funcion logout del contexto y redirecciona al usuario a la pagina de login
+    @returns {void} - No retorna ningun valor
+  */
   const handleLogout = () => {
     logout();
     router.push('/auth/login');
   };
 
+  /* 
+    Funcion que se encarga de controlar el evento click del boton de cambiar tema e invoca la funcion toggleTheme del contexto
+    @returns {void} - No retorna ningun valor
+  */
   const handleToggleTheme = () => {
     toggleTheme();
   };

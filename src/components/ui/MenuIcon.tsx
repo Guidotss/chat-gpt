@@ -1,3 +1,8 @@
+/* 
+  Componente que se encarga de renderizar el icono del menu unicamente en dispositivos moviles
+  @returns {JSX.Element} - Retorna el icono del menu
+*/
+
 export const MenuIcon = () => {
   return (
     <svg

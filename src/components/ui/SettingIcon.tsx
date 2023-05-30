@@ -1,3 +1,7 @@
+/* 
+  Componente que se encarga de renderizar el icono de configuracion
+  @returns {JSX.Element} - Retorna el icono de configuracion
+*/
 export const SettingIcon = () => {
   return (
     <svg

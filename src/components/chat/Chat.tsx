@@ -5,11 +5,22 @@ import { ChatContext } from '@/context/chat';
 import { MessageList, ChatDescription } from './';
 import { UiContext } from '@/context/ui';
 
+
+/* 
+  Componente que se encarga de renderizar el chat
+  @returns {JSX.Element} - Retorna el chat
+
+*/
 export const Chat = () => {
   const { messages, sendMessage } = useContext(ChatContext);
   const [value, setValue] = useState('');
   const { theme } = useContext(UiContext)
 
+  /* 
+    Funcion que se encarga de controlar el evento submit del formulario para luego enviar el contenido del mensaje al contexto
+    @param {FormEvent} e - Evento del formulario
+    @returns {void} - No retorna ningun valor
+  */
   const onSubmitMessage = (e: FormEvent) => {
     e.preventDefault();
     if (value.length > 0) {

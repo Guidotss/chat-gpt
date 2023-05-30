@@ -1,46 +1,64 @@
-import { FC, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
-interface TypingEffectProps {
+interface TypingEffectCanvasProps {
   text: string;
 }
 
-export const TypingEffect: FC<TypingEffectProps> = ({ text }) => {
-  const [dislpayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
+export const TypingEffect: React.FC<TypingEffectCanvasProps> = ({ text }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [displayText, setDisplayText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
-    if (!text?.length) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    const randomTime = Math.floor(Math.random() * 100) + 15;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    const interval = setInterval(() => {
-      if (currentIndex >= text.length) {
-        clearInterval(interval);
+    let animationFrameId: number;
+    let currentIndex = 0;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (!text?.length || currentIndex >= text.length) {
         setShowCursor(false);
+        cancelAnimationFrame(animationFrameId);
         return;
       }
+
       const nextIndex = text.indexOf(' ', currentIndex + 1);
-      if (nextIndex === -1) {
-        setDisplayText(text);
-        setCurrentIndex(text.length);
-        return;
+      const displayText = nextIndex === -1 ? text : text.slice(0, nextIndex + 1);
+
+      ctx.font = '16px Arial';
+      ctx.fillText(displayText, 0, 20);
+
+      if (showCursor) {
+        ctx.fillText('▋', ctx.measureText(displayText).width, 20);
       }
 
-      setDisplayText(text.slice(0, nextIndex));
-      setCurrentIndex(nextIndex + 1);
-    }, randomTime);
+      currentIndex += 1;
+      setDisplayText(displayText);
 
-    return () => clearInterval(interval);
-  }, [text, currentIndex]);
+      animationFrameId = requestAnimationFrame(draw);
+    };
+
+    canvas.width = ctx.measureText(text).width;
+    canvas.height = 20;
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      setShowCursor(false);
+    };
+  }, [text, showCursor]);
 
   return (
-    <span
-      className={`${
-        showCursor ? 'after:content-["▋"] after:ml-1 after:animate-pulse' : ''
-      } text-md font-semibold`}
-    >
-      {dislpayText}
-    </span>
+    <div style={{ display: 'inline-block' }}>
+      <canvas ref={canvasRef} style={{ display: 'none' }} />
+      <span>{displayText}</span>
+    </div>
   );
 };

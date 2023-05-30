@@ -1,3 +1,7 @@
+/* 
+  Componente que se encarga de renderizar el icono de GPT
+  @returns {JSX.Element} - Retorna el icono de GPT
+*/
 export const GptIcon = () => {
   return (
     <svg

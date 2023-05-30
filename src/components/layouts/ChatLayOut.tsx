@@ -12,6 +12,15 @@ interface ChatLayOutProps {
   fullUrlImage?: string;
 }
 
+/* 
+  Componente que se encarga de renderizar el layout de la pagina de chat
+  @param {React.ReactNode} children - Componente hijo que se renderizara dentro del layout
+  @param {string} title - Titulo de la pagina
+  @param {string} description - Descripcion de la pagina
+  @param {string} fullUrlImage - Url de la imagen que se mostrara en la pagina
+  @returns {JSX.Element} - Retorna el layout de la pagina de chat
+*/
+
 export const ChatLayOut: FC<ChatLayOutProps> = ({ title,description,fullUrlImage,children }) => {
   const { theme, sidebar, openSidebar, closeSidebar } = useContext(UiContext);
 

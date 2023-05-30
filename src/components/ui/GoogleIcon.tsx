@@ -1,3 +1,8 @@
+
+/* 
+  Componente que renderiza el icono de Google
+  @returns {JSX.Element} - Retorna el icono de Google
+*/
 export const GoogleIcon = () => {
   return (
     <svg

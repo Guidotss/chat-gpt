@@ -3,11 +3,21 @@ import { SunIcon, ThunderIcon, WarningIcon } from '../ui';
 import { UiContext } from '@/context/ui';
 import { ChatContext } from '@/context/chat';
 
+
+/* 
+  Componente que se encarga de renderizar la descripcion del chat
+  @returns {JSX.Element} - Retorna la descripcion del chat
+*/
 export const ChatDescription = () => {
 
   const { theme,sidebar,closeSidebar } = useContext(UiContext); 
   const { sendMessage } = useContext(ChatContext); 
 
+  /* 
+    Funcion que se encarga de controlar el evento click de los mensajes de ejemplo para luego enviar el contenido del mensaje al contexto
+    @param {MouseEvent<HTMLLIElement>} event - Evento del elemento
+    @returns {void} - No retorna ningun valor
+  */
   const handleClickMessage = (event:MouseEvent<HTMLLIElement>) => {
     
     if(sidebar){

@@ -1,6 +1,10 @@
 import { UiContext } from "@/context/ui";
 import { useContext } from "react";
 
+/* 
+  Componente que se encarga de renderizar el icono de rayo
+  @returns {JSX.Element} - Retorna el icono de rayo
+*/
 export const ThunderIcon = () => {
 
   const { theme } = useContext(UiContext)

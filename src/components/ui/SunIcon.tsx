@@ -1,6 +1,10 @@
 import { UiContext } from "@/context/ui";
 import { useContext } from "react";
 
+/* 
+  Componente que se encarga de renderizar el icono de sol
+  @returns {JSX.Element} - Retorna el icono de sol
+*/
 export const SunIcon = () => {
 
   const { theme } = useContext(UiContext); 
