@@ -28,8 +28,8 @@ export const TypingEffect: React.FC<TypingEffectCanvasProps> = ({ text }) => {
         return;
       }
 
-      const nextIndex = text.indexOf(' ', currentIndex + 1);
-      const displayText = nextIndex === -1 ? text : text.slice(0, nextIndex + 1);
+      const nextIndex = currentIndex + 1;
+      const displayText = text.slice(0, nextIndex);
 
       ctx.font = '16px Arial';
       ctx.fillText(displayText, 0, 20);
@@ -38,7 +38,7 @@ export const TypingEffect: React.FC<TypingEffectCanvasProps> = ({ text }) => {
         ctx.fillText('▋', ctx.measureText(displayText).width, 20);
       }
 
-      currentIndex += 1;
+      currentIndex = nextIndex;
       setDisplayText(displayText);
 
       animationFrameId = requestAnimationFrame(draw);
