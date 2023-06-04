@@ -1,64 +1,46 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react'
 
-interface TypingEffectCanvasProps {
+
+
+interface TypingEffectProps {
   text: string;
 }
 
-export const TypingEffect: React.FC<TypingEffectCanvasProps> = ({ text }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [displayText, setDisplayText] = useState('');
-  const [showCursor, setShowCursor] = useState(true);
+
+export const useTypingEffect = ({ text }:{ text:string }) => {
+  const [displayText, setDisplayText] = useState('')
+  const [currentIndex, setCurrentIndex] = useState(0) // podríamos usar un useRef
+  const [showCursor, setShowCursor] = useState(true)
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!text?.length) return
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationFrameId: number;
-    let currentIndex = 0;
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      if (!text?.length || currentIndex >= text.length) {
-        setShowCursor(false);
-        cancelAnimationFrame(animationFrameId);
-        return;
+    const intervalId = setInterval(() => {
+      if (currentIndex >= text.length) {
+        clearInterval(intervalId)
+        setShowCursor(false)
+        return
       }
 
-      const nextIndex = currentIndex + 1;
-      const displayText = text.slice(0, nextIndex);
-
-      ctx.font = '16px Arial';
-      ctx.fillText(displayText, 0, 20);
-
-      if (showCursor) {
-        ctx.fillText('▋', ctx.measureText(displayText).width, 20);
+      const nextIndex = text.indexOf(' ', currentIndex + 1)
+      if (nextIndex < 0) {
+        setDisplayText(text)
+        setCurrentIndex(text.length)
+        return
       }
 
-      currentIndex = nextIndex;
-      setDisplayText(displayText);
+      setDisplayText(text.slice(0, nextIndex))
+      setCurrentIndex(currentIndex + 1)
+    }, 1)
 
-      animationFrameId = requestAnimationFrame(draw);
-    };
+    return () => clearInterval(intervalId)
+  }, [text, currentIndex])
 
-    canvas.width = ctx.measureText(text).width;
-    canvas.height = 20;
+  return { displayText, showCursor }
+}
 
-    draw();
+export const TypingEffect:FC<TypingEffectProps> =  ({ text })  => {
+  const { displayText, showCursor } = useTypingEffect({ text })
 
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      setShowCursor(false);
-    };
-  }, [text, showCursor]);
-
-  return (
-    <div style={{ display: 'inline-block' }}>
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
-      <span>{displayText}</span>
-    </div>
-  );
-};
+  return <span className={`${showCursor ? 'after:content-["▋"] after:ml-1 after:animate-typing' : ''}`} dangerouslySetInnerHTML={{ __html: displayText }} />
+}
