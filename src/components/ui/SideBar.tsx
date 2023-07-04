@@ -60,7 +60,7 @@ export const SideBar = () => {
             <span>Nuevo Chat</span>
           </div>
         </div>
-        <div className='flex flex-col mt-5 gap-6 ml-4 text-md font-extralight overflow-auto sidebar-scroll-bar h-4/5'>
+        <div className='flex flex-col mt-5 gap-6 ml-4 text-md font-extralight overflow-auto sidebar-scroll-bar h-4/5 sm:h-[150px]'>
           {messages.map((item) => {
             if (item.ia) return null;
             return (
